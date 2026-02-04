@@ -2,6 +2,13 @@ package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.validation.constraints.*;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+import com.bank.modernize.enums.LoanStatus;
+import com.bank.modernize.enums.LoanType;
 
 @Entity
 @Table(name = "loans")
@@ -13,21 +20,28 @@ public class Loan {
     private Long loanId;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "customer_id", nullable = false)
+    @NotNull
+    private User customer;
 
-    @Column(nullable=false)
-    private double salary;
-    
-    @Column(nullable=false)
-    private int riskScore;
-    
-    @Column(nullable=false)
-    private double loanAmount;
-    
-    @Column(nullable=false)
-    private double emi;
-    
-    @Column(nullable=false)
-    private String status;
+    @NotNull
+    private BigDecimal salary;
+
+    @NotNull
+    @Column(name = "loan_amount")
+    private BigDecimal loanAmount;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private LoanType loanType;
+
+    @NotNull
+    private BigDecimal emi;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    private LoanStatus status;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Timestamp createdAt;
 }
