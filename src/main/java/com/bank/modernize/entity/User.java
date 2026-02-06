@@ -5,6 +5,8 @@ import lombok.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.bank.modernize.enums.Role;
 import com.bank.modernize.enums.Status;
 
@@ -15,7 +17,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Long userId;
 
     @NotBlank
@@ -46,16 +47,16 @@ public class User {
     @Column(name = "mfa_enabled", nullable = false)
     private Boolean mfaEnabled = false;
 
-    @Column(name = "mfa_secret")
-    private String mfaSecret;
+    @Column(name = "otp_code")
+    private String otpCode;
 
+    private LocalDateTime otpExpiry;
+
+    private String resetToken;
+
+    private LocalDateTime resetTokenExpiry;
+
+    @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @PrePersist
-    public void prePersist() {
-        if (createdAt == null) {
-            createdAt = LocalDateTime.now();
-        }
-    }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.*;
 import java.sql.Timestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "audit_logs")
@@ -23,6 +24,7 @@ public class AuditLog {
     @Column(nullable = false)
     private String action;
 
+    @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Timestamp timestamp;
 }
