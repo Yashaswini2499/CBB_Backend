@@ -6,4 +6,10 @@ import com.bank.modernize.entity.*;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 	
+	       
+
+	    boolean existsByFromAccount_AccountId(Long accountId);
+
+	    boolean existsByToAccount_AccountId(Long accountId);
+	
 }

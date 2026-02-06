@@ -3,7 +3,7 @@ package com.bank.modernize.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.validation.constraints.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.bank.modernize.enums.Role;
 import com.bank.modernize.enums.Status;
@@ -15,6 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long userId;
 
     @NotBlank
@@ -41,7 +42,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     @NotNull
     private Status status;
-    
+
     @Column(name = "mfa_enabled", nullable = false)
     private Boolean mfaEnabled = false;
 
@@ -49,5 +50,12 @@ public class User {
     private String mfaSecret;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 }

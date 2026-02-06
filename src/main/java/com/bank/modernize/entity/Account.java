@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import com.bank.modernize.enums.AccountStatus;
 import com.bank.modernize.enums.AccountType;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "accounts")
 @Data
@@ -15,11 +15,13 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "account_id")
     private Long accountId;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     @NotNull
+    @JsonIgnoreProperties({"password","mfaSecret","createdAt","email","phone","role","status","mfaEnabled"})
     private User customer;
 
     @NotNull
@@ -32,13 +34,19 @@ public class Account {
     private AccountType accountType;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "balance", nullable = false)
     private BigDecimal balance;
 
     @Enumerated(EnumType.STRING)
     @NotNull
+    @Column(name = "status", nullable = false)
     private AccountStatus status;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Timestamp createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+    }
 }
