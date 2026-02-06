@@ -1,14 +1,19 @@
 package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import jakarta.validation.constraints.*;
-import java.sql.Timestamp;
+import lombok.*;
+
+import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "audit_logs")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AuditLog {
 
     @Id
@@ -25,6 +30,6 @@ public class AuditLog {
     private String action;
 
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
-    private Timestamp timestamp;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime timestamp; 
 }

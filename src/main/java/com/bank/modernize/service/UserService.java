@@ -18,9 +18,6 @@ public class UserService {
 
     private final UserRepository userRepo;
 
-    // =========================
-    // CREATE USER
-    // =========================
     @Transactional
     public UserResponse createUser(CreateUserRequest req) {
 
@@ -36,16 +33,12 @@ public class UserService {
         user.setRole(req.getRole());
         user.setStatus(req.getStatus() != null ? req.getStatus() : Status.ACTIVE);
         user.setMfaEnabled(req.isMfaEnabled());
-        user.setMfaSecret(req.getMfaSecret());
 
         userRepo.save(user);
 
         return mapToResponse(user);
     }
 
-    // =========================
-    // UPDATE USER
-    // =========================
     @Transactional
     public UserResponse updateUser(Long userId, UpdateUserRequest req) {
 
@@ -65,17 +58,11 @@ public class UserService {
         if (req.getMfaEnabled() != null)
             user.setMfaEnabled(req.getMfaEnabled());
 
-        if (req.getMfaSecret() != null)
-            user.setMfaSecret(req.getMfaSecret());
-
         userRepo.save(user);
 
         return mapToResponse(user);
     }
 
-    // =========================
-    // DELETE USER
-    // =========================
     @Transactional
     public String deleteUser(Long userId) {
 

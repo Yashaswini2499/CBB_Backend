@@ -10,5 +10,4 @@ public class UpdateUserRequest {
     private String phone;
     private Status status;        // ACTIVE / INACTIVE
     private Boolean mfaEnabled;   // true / false
-    private String mfaSecret;     // optional
 }

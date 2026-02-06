@@ -1,11 +1,11 @@
 package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.enums.LoanType;
@@ -13,7 +13,11 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "loans")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Loan {
 
     @Id
@@ -26,14 +30,15 @@ public class Loan {
     private User customer;
 
     @NotNull
-    @Column(precision = 12, scale = 2)
+    @DecimalMin(value = "1.0", message = "Salary must be positive")
+    @Column(precision = 12, scale = 2, nullable = false)
     private BigDecimal salary;
 
     @NotNull
-    @Column(name = "loan_amount", precision = 15, scale = 2)
+    @DecimalMin(value = "1000.0", message = "Loan amount too small")
+    @Column(name = "loan_amount", precision = 15, scale = 2, nullable = false)
     private BigDecimal loanAmount;
 
-    // 🔹 CREDIT SCORE
     @Min(300)
     @Max(900)
     @Column(name = "credit_score", nullable = false)
@@ -44,14 +49,21 @@ public class Loan {
     private LoanType loanType;
 
     @NotNull
-    @Column(precision = 12, scale = 2)
+    @DecimalMin(value = "1.0", message = "EMI must be positive")
+    @Column(precision = 12, scale = 2, nullable = false)
     private BigDecimal emi;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @NotNull
+    @Column(nullable = false)
     private LoanStatus status = LoanStatus.PENDING;
+
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
+
+
 }
+

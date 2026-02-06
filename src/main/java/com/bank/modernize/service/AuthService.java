@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.security.SecureRandom;
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.bank.modernize.dto.*;
@@ -24,7 +23,9 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final EmailService emailService;
 
+    // ✅ REGISTER
     public void register(RegisterRequest req) {
+
         if (repo.findByEmail(req.getEmail()).isPresent())
             throw new RuntimeException("Email already exists");
 
@@ -40,6 +41,7 @@ public class AuthService {
         repo.save(user);
     }
 
+    // ✅ LOGIN → SEND OTP
     public String login(LoginRequest req) {
 
         User user = repo.findByEmail(req.getEmail())
@@ -48,32 +50,29 @@ public class AuthService {
         if (!encoder.matches(req.getPassword(), user.getPassword()))
             throw new RuntimeException("Invalid password");
 
-
         if (!Boolean.TRUE.equals(user.getMfaEnabled())) {
             user.setMfaEnabled(true);
-            System.out.println("MFA enabled");
         }
 
         String otp = String.valueOf(new SecureRandom().nextInt(900000) + 100000);
-        System.out.println("Generated OTP: " + otp);
 
         user.setOtpCode(otp);
-        user.setOtpExpiry(Timestamp.from(Instant.now().plusSeconds(300)));
+        user.setOtpExpiry(LocalDateTime.now().plusMinutes(5));  // 🔥 FIXED
 
         repo.save(user);
-
-        System.out.println("OTP saved to DB");
 
         emailService.sendOtp(user.getEmail(), otp);
 
         return "OTP_SENT";
     }
 
+    // ✅ VERIFY OTP → ISSUE JWT
     public String verifyOtp(OtpRequest req) {
 
-        User user = repo.findByEmail(req.getEmail()).orElseThrow();
+        User user = repo.findByEmail(req.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (user.getOtpExpiry().before(new Timestamp(System.currentTimeMillis())))
+        if (user.getOtpExpiry() == null || user.getOtpExpiry().isBefore(LocalDateTime.now()))
             throw new RuntimeException("OTP expired");
 
         if (!user.getOtpCode().equals(req.getOtp()))
@@ -86,26 +85,35 @@ public class AuthService {
         return jwtUtil.generateToken(user.getEmail());
     }
 
+    // ✅ FORGOT PASSWORD
     public void forgotPassword(String email) {
-        User user = repo.findByEmail(email).orElseThrow();
+
+        User user = repo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         String token = UUID.randomUUID().toString();
+
         user.setResetToken(token);
-        user.setResetTokenExpiry(Timestamp.from(Instant.now().plusSeconds(900)));
+        user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15)); 
+
         repo.save(user);
 
         emailService.sendResetLink(email, token);
     }
 
-    public void resetPassword(String token, String newPass) {
-        User user = repo.findByResetToken(token).orElseThrow();
 
-        if (user.getResetTokenExpiry().before(new Timestamp(System.currentTimeMillis())))
+    public void resetPassword(String token, String newPass) {
+
+        User user = repo.findByResetToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
+
+        if (user.getResetTokenExpiry() == null || user.getResetTokenExpiry().isBefore(LocalDateTime.now()))
             throw new RuntimeException("Link expired");
 
         user.setPassword(encoder.encode(newPass));
         user.setResetToken(null);
         user.setResetTokenExpiry(null);
+
         repo.save(user);
     }
 }

@@ -39,6 +39,7 @@ public class UserController {
                 accountService.getAccountsByCustomerId(userId)
         );
     }
+    
     @PutMapping("/{userId}")
     public ResponseEntity<UserResponse> updateUser(
             @PathVariable Long userId,
@@ -47,11 +48,10 @@ public class UserController {
         return ResponseEntity.ok(
                 userService.updateUser(userId, request));
     }
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
-
-
     
 }

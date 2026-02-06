@@ -1,18 +1,22 @@
 package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import com.bank.modernize.enums.TxnStatus;
 import com.bank.modernize.enums.TxnType;
 
 @Entity
 @Table(name = "transactions")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Transaction {
 
     @Id
@@ -25,7 +29,7 @@ public class Transaction {
     private Account fromAccount;
 
     @ManyToOne
-    @JoinColumn(name = "to_acc_id", nullable = true)
+    @JoinColumn(name = "to_acc_id")
     private Account toAccount;
 
     @Enumerated(EnumType.STRING)
@@ -34,7 +38,8 @@ public class Transaction {
     private TxnType txnType;
 
     @NotNull
-    @Column(nullable = false)
+    @DecimalMin(value = "0.01", message = "Amount must be positive")
+    @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
@@ -42,29 +47,10 @@ public class Transaction {
     private TxnStatus status;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
 
-    // Hibernate needs no-args constructor
-    public Transaction() {
-    }
-
-    // Convenience constructor
-    public Transaction(Account fromAccount,
-                       Account toAccount,
-                       TxnType txnType,
-                       BigDecimal amount,
-                       TxnStatus status) {
-
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
-        this.txnType = txnType;
-        this.amount = amount;
-        this.status = status;
-    }
-
-    // Auto timestamp
     @PrePersist
     protected void onCreate() {
-        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.createdAt = LocalDateTime.now();
     }
 }
