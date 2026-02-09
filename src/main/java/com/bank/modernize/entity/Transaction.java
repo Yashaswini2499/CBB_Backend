@@ -38,7 +38,6 @@ public class Transaction {
     private TxnType txnType;
 
     @NotNull
-    @DecimalMin(value = "0.01", message = "Amount must be positive")
     @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal amount;
 

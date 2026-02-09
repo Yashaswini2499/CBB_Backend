@@ -23,7 +23,6 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final EmailService emailService;
 
-    // ✅ REGISTER
     public void register(RegisterRequest req) {
 
         if (repo.findByEmail(req.getEmail()).isPresent())
@@ -41,7 +40,6 @@ public class AuthService {
         repo.save(user);
     }
 
-    // ✅ LOGIN → SEND OTP
     public String login(LoginRequest req) {
 
         User user = repo.findByEmail(req.getEmail())
@@ -50,15 +48,10 @@ public class AuthService {
         if (!encoder.matches(req.getPassword(), user.getPassword()))
             throw new RuntimeException("Invalid password");
 
-        if (!Boolean.TRUE.equals(user.getMfaEnabled())) {
-            user.setMfaEnabled(true);
-        }
-
         String otp = String.valueOf(new SecureRandom().nextInt(900000) + 100000);
 
-        user.setOtpCode(otp);
-        user.setOtpExpiry(LocalDateTime.now().plusMinutes(5));  // 🔥 FIXED
-
+        user.setOtpCode(encoder.encode(otp));
+        user.setOtpExpiry(LocalDateTime.now().plusMinutes(5));
         repo.save(user);
 
         emailService.sendOtp(user.getEmail(), otp);
@@ -66,7 +59,6 @@ public class AuthService {
         return "OTP_SENT";
     }
 
-    // ✅ VERIFY OTP → ISSUE JWT
     public String verifyOtp(OtpRequest req) {
 
         User user = repo.findByEmail(req.getEmail())
@@ -75,17 +67,21 @@ public class AuthService {
         if (user.getOtpExpiry() == null || user.getOtpExpiry().isBefore(LocalDateTime.now()))
             throw new RuntimeException("OTP expired");
 
-        if (!user.getOtpCode().equals(req.getOtp()))
+        if (!encoder.matches(req.getOtp(), user.getOtpCode()))
             throw new RuntimeException("Invalid OTP");
 
         user.setOtpCode(null);
         user.setOtpExpiry(null);
+
+        if (!Boolean.TRUE.equals(user.getMfaEnabled())) {
+            user.setMfaEnabled(true);   
+        }
+
         repo.save(user);
 
         return jwtUtil.generateToken(user.getEmail());
     }
 
-    // ✅ FORGOT PASSWORD
     public void forgotPassword(String email) {
 
         User user = repo.findByEmail(email)
@@ -93,8 +89,8 @@ public class AuthService {
 
         String token = UUID.randomUUID().toString();
 
-        user.setResetToken(token);
-        user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15)); 
+        user.setResetToken(token); 
+        user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15));
 
         repo.save(user);
 
@@ -102,12 +98,13 @@ public class AuthService {
     }
 
 
+
     public void resetPassword(String token, String newPass) {
 
         User user = repo.findByResetToken(token)
                 .orElseThrow(() -> new RuntimeException("Invalid token"));
 
-        if (user.getResetTokenExpiry() == null || user.getResetTokenExpiry().isBefore(LocalDateTime.now()))
+        if (user.getResetTokenExpiry().isBefore(LocalDateTime.now()))
             throw new RuntimeException("Link expired");
 
         user.setPassword(encoder.encode(newPass));
@@ -116,4 +113,6 @@ public class AuthService {
 
         repo.save(user);
     }
+
 }
+

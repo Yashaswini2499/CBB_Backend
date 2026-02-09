@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.bank.modernize.adapter.CobolAdapter;
 import com.bank.modernize.dto.AccountResponse;
 import com.bank.modernize.dto.CreateAccountRequest;
 import com.bank.modernize.service.AccountService;
@@ -13,13 +14,12 @@ import com.bank.modernize.service.AccountService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("/accounts")
 @RequiredArgsConstructor
 public class AccountController {
 
     private final AccountService accountService;
 
-    // CREATE
     @PostMapping("/create")
     public ResponseEntity<AccountResponse> createAccount(
             @RequestBody CreateAccountRequest request) {
@@ -29,7 +29,7 @@ public class AccountController {
                 .body(accountService.createAccount(request));
     }
 
-    // GET BY ID
+
     @GetMapping("/{accountId}")
     public ResponseEntity<AccountResponse> getAccountById(
             @PathVariable Long accountId) {
@@ -38,7 +38,7 @@ public class AccountController {
                 accountService.getAccountById(accountId));
     }
 
-    // GET ALL
+
     @GetMapping
     public ResponseEntity<List<AccountResponse>> getAllAccounts() {
 
@@ -46,7 +46,6 @@ public class AccountController {
                 accountService.getAllAccounts());
     }
 
-    // GET BY CUSTOMER
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<AccountResponse>> getByCustomerId(
             @PathVariable Long customerId) {
@@ -55,7 +54,7 @@ public class AccountController {
                 accountService.getAccountsByCustomerId(customerId));
     }
 
-    // DELETE BY ACCOUNT ID
+ 
     @DeleteMapping("/{accountId}")
     public ResponseEntity<String> deleteByAccountId(
             @PathVariable Long accountId) {
@@ -65,7 +64,6 @@ public class AccountController {
         return ResponseEntity.ok("Account deleted successfully");
     }
 
-    // DELETE BY CUSTOMER ID
     @DeleteMapping("/customer/{customerId}")
     public ResponseEntity<String> deleteByCustomerId(
             @PathVariable Long customerId) {

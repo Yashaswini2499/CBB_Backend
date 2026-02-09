@@ -22,6 +22,7 @@ import com.bank.modernize.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
 @Service
 @RequiredArgsConstructor
 public class AccountService {
@@ -29,10 +30,12 @@ public class AccountService {
     private final AccountRepository accountRepo;
     private final UserRepository userRepo;
     private final TransactionRepository transactionRepo;
+    private final AccountRepository accountRepository;
 
-    // =========================
-    // CREATE ACCOUNT
-    // =========================
+    public List<Account> getAccountsOfCustomer(Long userId) {
+        return accountRepository.findByCustomerUserId(userId);
+    }
+    
     @Transactional
     public AccountResponse createAccount(CreateAccountRequest request) {
 
@@ -75,9 +78,6 @@ public class AccountService {
         return mapToResponse(acc);
     }
 
-    // =========================
-    // GET ACCOUNT BY ID
-    // =========================
     public AccountResponse getAccountById(Long accountId) {
 
         Account acc = accountRepo.findById(accountId)
@@ -89,9 +89,6 @@ public class AccountService {
         return mapToResponse(acc);
     }
 
-    // =========================
-    // GET ALL ACCOUNTS
-    // =========================
     public List<AccountResponse> getAllAccounts() {
         return accountRepo.findAll()
                 .stream()
@@ -99,9 +96,6 @@ public class AccountService {
                 .collect(Collectors.toList());
     }
 
-    // =========================
-    // GET BY CUSTOMER ID
-    // =========================
     public List<AccountResponse> getAccountsByCustomerId(Long customerId) {
 
         if (!userRepo.existsById(customerId)) {
@@ -116,9 +110,6 @@ public class AccountService {
                 .collect(Collectors.toList());
     }
 
-    // =========================
-    // DELETE ACCOUNT
-    // =========================
     @Transactional
     public void deleteAccountById(Long accountId) {
 
@@ -140,9 +131,7 @@ public class AccountService {
         accountRepo.delete(account);
     }
 
-    // =========================
-    // DELETE BY CUSTOMER
-    // =========================
+
     @Transactional
     public void deleteAccountsByCustomerId(Long customerId) {
 
