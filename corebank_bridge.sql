@@ -11,6 +11,7 @@ CREATE TABLE users (
     role VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL,
 	mfa_enabled BOOLEAN NOT NULL DEFAULT FALSE,
+
     otp_code VARCHAR(100),
     otp_expiry TIMESTAMP NULL,
     reset_token VARCHAR(255),
