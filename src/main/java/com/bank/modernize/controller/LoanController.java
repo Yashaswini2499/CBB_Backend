@@ -15,7 +15,7 @@ import com.bank.modernize.service.LoanService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/loans")
+@RequestMapping("/loans")
 @RequiredArgsConstructor
 public class LoanController {
 

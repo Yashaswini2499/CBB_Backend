@@ -39,7 +39,8 @@ public class SecurityConfig {
                 "/transactions/**",
                 "/accounts/**",
                 "/bank/**",
-                "/users/**"
+                "/users/**",
+                "/api/loans**"
             ).permitAll()
             .anyRequest().authenticated()
         )

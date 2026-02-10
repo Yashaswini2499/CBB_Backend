@@ -23,9 +23,6 @@ public class LoanService {
     private final LoanRepository loanRepo;
     private final UserRepository userRepo;
 
-    // ===============================
-    // APPLY FOR LOAN (USER)
-    // ===============================
     @Transactional
     public Loan applyLoan(
             Long userId,
