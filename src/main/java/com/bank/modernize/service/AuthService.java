@@ -23,6 +23,7 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final EmailService emailService;
 
+    // ================= REGISTER =================
     public void register(RegisterRequest req) {
 
         if (repo.findByEmail(req.getEmail()).isPresent())
@@ -40,6 +41,7 @@ public class AuthService {
         repo.save(user);
     }
 
+    // ================= LOGIN (SEND OTP) =================
     public String login(LoginRequest req) {
 
         User user = repo.findByEmail(req.getEmail())
@@ -48,6 +50,7 @@ public class AuthService {
         if (!encoder.matches(req.getPassword(), user.getPassword()))
             throw new RuntimeException("Invalid password");
 
+        // Generate OTP
         String otp = String.valueOf(new SecureRandom().nextInt(900000) + 100000);
 
         user.setOtpCode(encoder.encode(otp));
@@ -59,7 +62,8 @@ public class AuthService {
         return "OTP_SENT";
     }
 
-    public String verifyOtp(OtpRequest req) {
+    // ================= VERIFY OTP → RETURN TOKEN + ROLE =================
+    public LoginResponse verifyOtp(OtpRequest req) {
 
         User user = repo.findByEmail(req.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -73,15 +77,18 @@ public class AuthService {
         user.setOtpCode(null);
         user.setOtpExpiry(null);
 
-        if (!Boolean.TRUE.equals(user.getMfaEnabled())) {
-            user.setMfaEnabled(true);   
-        }
-
         repo.save(user);
 
-        return jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(user.getEmail());
+
+        return new LoginResponse(
+                token,
+                user.getRole().name(),
+                user.getEmail()
+        );
     }
 
+    // ================= FORGOT PASSWORD =================
     public void forgotPassword(String email) {
 
         User user = repo.findByEmail(email)
@@ -89,7 +96,7 @@ public class AuthService {
 
         String token = UUID.randomUUID().toString();
 
-        user.setResetToken(token); 
+        user.setResetToken(token);
         user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15));
 
         repo.save(user);
@@ -97,8 +104,7 @@ public class AuthService {
         emailService.sendResetLink(email, token);
     }
 
-
-
+    // ================= RESET PASSWORD =================
     public void resetPassword(String token, String newPass) {
 
         User user = repo.findByResetToken(token)
@@ -113,6 +119,4 @@ public class AuthService {
 
         repo.save(user);
     }
-
 }
-

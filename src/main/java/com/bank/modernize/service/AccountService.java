@@ -172,5 +172,20 @@ public class AccountService {
 
         return number;
     }
-    
+ // ========================================
+ // GET ACCOUNTS OF LOGGED-IN USER (BY EMAIL)
+ // ========================================
+ public List<AccountResponse> getAccountsByEmail(String email) {
+
+     User user = userRepo.findByEmail(email)
+             .orElseThrow(() ->
+                     new org.springframework.web.server.ResponseStatusException(
+                             org.springframework.http.HttpStatus.NOT_FOUND,
+                             "User not found"));
+
+     return accountRepo.findByCustomerUserId(user.getUserId())
+             .stream()
+             .map(this::mapToResponse)
+             .collect(java.util.stream.Collectors.toList());
+ }
 }

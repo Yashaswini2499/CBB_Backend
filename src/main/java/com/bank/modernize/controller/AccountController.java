@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.bank.modernize.adapter.CobolAdapter;
 import com.bank.modernize.dto.AccountResponse;
 import com.bank.modernize.dto.CreateAccountRequest;
 import com.bank.modernize.service.AccountService;
@@ -20,6 +19,9 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    // =========================
+    // CREATE ACCOUNT
+    // =========================
     @PostMapping("/create")
     public ResponseEntity<AccountResponse> createAccount(
             @RequestBody CreateAccountRequest request) {
@@ -29,7 +31,9 @@ public class AccountController {
                 .body(accountService.createAccount(request));
     }
 
-
+    // =========================
+    // GET ACCOUNT BY ID
+    // =========================
     @GetMapping("/{accountId}")
     public ResponseEntity<AccountResponse> getAccountById(
             @PathVariable Long accountId) {
@@ -38,7 +42,9 @@ public class AccountController {
                 accountService.getAccountById(accountId));
     }
 
-
+    // =========================
+    // GET ALL ACCOUNTS
+    // =========================
     @GetMapping
     public ResponseEntity<List<AccountResponse>> getAllAccounts() {
 
@@ -46,6 +52,9 @@ public class AccountController {
                 accountService.getAllAccounts());
     }
 
+    // =========================
+    // GET ACCOUNTS BY CUSTOMER ID
+    // =========================
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<AccountResponse>> getByCustomerId(
             @PathVariable Long customerId) {
@@ -54,7 +63,22 @@ public class AccountController {
                 accountService.getAccountsByCustomerId(customerId));
     }
 
- 
+    // =========================
+    // GET LOGGED-IN USER ACCOUNTS (BALANCE)
+    // =========================
+    @GetMapping("/my-accounts")
+    public ResponseEntity<List<AccountResponse>> getMyAccounts(
+            org.springframework.security.core.Authentication auth) {
+
+        String email = auth.getName();
+
+        return ResponseEntity.ok(
+                accountService.getAccountsByEmail(email));
+    }
+
+    // =========================
+    // DELETE ACCOUNT
+    // =========================
     @DeleteMapping("/{accountId}")
     public ResponseEntity<String> deleteByAccountId(
             @PathVariable Long accountId) {
