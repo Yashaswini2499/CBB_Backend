@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import org.springframework.stereotype.Service;
 
+import com.bank.modernize.dto.TransactionHistoryResponse;
 import com.bank.modernize.dto.TransactionResponse;
 import com.bank.modernize.entity.Account;
 import com.bank.modernize.entity.Transaction;
@@ -70,5 +71,21 @@ public class TransactionService {
         }
 
         return response;
+    }
+    
+    public List<TransactionHistoryResponse> getAllTransactions() {
+
+        return transactionRepo.findAllByOrderByCreatedAtDesc()
+                .stream()
+                .map(txn -> new TransactionHistoryResponse(
+                        txn.getTxnId(),
+                        txn.getCreatedAt(),
+                        txn.getFromAccount().getCustomer().getFullName(),
+                        txn.getTxnType().name(),
+                        txn.getFromAccount().getAccountNumber(),
+                        txn.getAmount(),
+                        txn.getStatus().name()
+                ))
+                .toList();
     }
 }
