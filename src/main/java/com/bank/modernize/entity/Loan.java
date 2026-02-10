@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import com.bank.modernize.enums.LoanStatus;
@@ -59,11 +60,17 @@ public class Loan {
     @Column(nullable = false)
     private LoanStatus status = LoanStatus.PENDING;
 
-
-    @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.status = LoanStatus.PENDING;
+    }
+
 
 }
+
+
 

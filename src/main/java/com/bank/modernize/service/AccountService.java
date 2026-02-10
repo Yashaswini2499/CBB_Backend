@@ -144,9 +144,7 @@ public class AccountService {
         accountRepo.deleteByCustomerUserId(customerId);
     }
 
-    // =========================
-    // HELPERS
-    // =========================
+
     private AccountResponse mapToResponse(Account acc) {
 
         AccountResponse res = new AccountResponse();
@@ -156,7 +154,7 @@ public class AccountService {
         res.setAccountType(acc.getAccountType());
         res.setBalance(acc.getBalance());
         res.setStatus(acc.getStatus());
-
+        res.setCreatedAt(acc.getCreatedAt().toLocalDateTime());
         return res;
     }
 
