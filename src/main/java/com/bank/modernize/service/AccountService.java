@@ -22,7 +22,6 @@ import com.bank.modernize.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Service
 @RequiredArgsConstructor
 public class AccountService {
@@ -30,12 +29,11 @@ public class AccountService {
     private final AccountRepository accountRepo;
     private final UserRepository userRepo;
     private final TransactionRepository transactionRepo;
-    private final AccountRepository accountRepository;
 
     public List<Account> getAccountsOfCustomer(Long userId) {
-        return accountRepository.findByCustomerUserId(userId);
+        return accountRepo.findByCustomerUserId(userId);
     }
-    
+
     @Transactional
     public AccountResponse createAccount(CreateAccountRequest request) {
 
@@ -74,7 +72,6 @@ public class AccountService {
         acc.setStatus(AccountStatus.ACTIVE);
 
         accountRepo.save(acc);
-
         return mapToResponse(acc);
     }
 
@@ -131,7 +128,6 @@ public class AccountService {
         accountRepo.delete(account);
     }
 
-
     @Transactional
     public void deleteAccountsByCustomerId(Long customerId) {
 
@@ -145,8 +141,9 @@ public class AccountService {
     }
 
     // =========================
-    // HELPERS
+    // HELPER METHODS
     // =========================
+
     private AccountResponse mapToResponse(Account acc) {
 
         AccountResponse res = new AccountResponse();
@@ -156,7 +153,7 @@ public class AccountService {
         res.setAccountType(acc.getAccountType());
         res.setBalance(acc.getBalance());
         res.setStatus(acc.getStatus());
-
+        res.setCreatedAt(acc.getCreatedAt().toLocalDateTime());
         return res;
     }
 
@@ -172,20 +169,21 @@ public class AccountService {
 
         return number;
     }
- // ========================================
- // GET ACCOUNTS OF LOGGED-IN USER (BY EMAIL)
- // ========================================
- public List<AccountResponse> getAccountsByEmail(String email) {
 
-     User user = userRepo.findByEmail(email)
-             .orElseThrow(() ->
-                     new org.springframework.web.server.ResponseStatusException(
-                             org.springframework.http.HttpStatus.NOT_FOUND,
-                             "User not found"));
+    // =========================
+    // GET ACCOUNTS BY EMAIL
+    // =========================
+    public List<AccountResponse> getAccountsByEmail(String email) {
 
-     return accountRepo.findByCustomerUserId(user.getUserId())
-             .stream()
-             .map(this::mapToResponse)
-             .collect(java.util.stream.Collectors.toList());
- }
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "User not found"));
+
+        return accountRepo.findByCustomerUserId(user.getUserId())
+                .stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
 }
