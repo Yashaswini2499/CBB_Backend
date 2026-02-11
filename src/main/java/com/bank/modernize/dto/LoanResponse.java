@@ -6,14 +6,22 @@ import java.time.LocalDateTime;
 import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.enums.LoanType;
 
+<<<<<<< HEAD
 public class LoanResponse {
 
+=======
+import lombok.Data;
+
+@Data
+public class LoanResponse {
+>>>>>>> origin/main
     private Long loanId;
     private Long customerId;
     private BigDecimal salary;
     private BigDecimal loanAmount;
     private Integer creditScore;
     private LoanType loanType;
+<<<<<<< HEAD
     private BigDecimal emi;
     private LoanStatus status;
     private LocalDateTime createdAt;
@@ -89,4 +97,11 @@ public class LoanResponse {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+=======
+    private Integer tenureMonths;
+    private BigDecimal emi;
+    private BigDecimal annualInterestRate; 
+    private LoanStatus status;
+    private LocalDateTime createdAt;
+>>>>>>> origin/main
 }

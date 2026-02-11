@@ -1,14 +1,23 @@
 package com.bank.modernize.dto;
+<<<<<<< HEAD
 
 import com.bank.modernize.enums.Role;
 import com.bank.modernize.enums.Status;
 
+=======
+import lombok.Data;
+import com.bank.modernize.enums.Role;
+import com.bank.modernize.enums.Status;
+
+@Data
+>>>>>>> origin/main
 public class CreateUserRequest {
 
     private String fullName;
     private String email;
     private String phone;
     private String password;
+<<<<<<< HEAD
     private Role role; // CUSTOMER or ADMIN
     private Status status; // ACTIVE or INACTIVE
     private boolean mfaEnabled; // true or false
@@ -77,4 +86,10 @@ public class CreateUserRequest {
     public void setMfaSecret(String mfaSecret) {
         this.mfaSecret = mfaSecret;
     }
+=======
+    private Role role;          // CUSTOMER or ADMIN
+    private Status status;      // ACTIVE or INACTIVE
+    private boolean mfaEnabled; // true or false
+    private String mfaSecret;   // optional, can be null
+>>>>>>> origin/main
 }

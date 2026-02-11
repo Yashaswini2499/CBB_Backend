@@ -13,16 +13,27 @@ import com.bank.modernize.dto.TransactionRequest;
 import com.bank.modernize.dto.TransferRequest;
 import com.bank.modernize.service.BankingService;
 
+<<<<<<< HEAD
 @RestController
 @RequestMapping("/bank")
+=======
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/bank")
+@RequiredArgsConstructor
+>>>>>>> origin/main
 public class BankingController {
 
     private final BankingService service;
 
+<<<<<<< HEAD
     public BankingController(BankingService service) {
         this.service = service;
     }
 
+=======
+>>>>>>> origin/main
     @PostMapping("/deposit")
     public ApiResponse deposit(@RequestBody TransactionRequest req) throws Exception {
         return service.deposit(req);
@@ -37,9 +48,21 @@ public class BankingController {
     public ApiResponse transfer(@RequestBody TransferRequest req) throws Exception {
         return service.transfer(req);
     }
+<<<<<<< HEAD
 
     @GetMapping("/customer/{userId}/total-balance")
     public ResponseEntity<ApiResponse> total(@PathVariable Long userId) {
         return ResponseEntity.ok(service.getCustomerTotalBalance(userId));
     }
+=======
+    
+    @GetMapping("/my-total-balance")
+    public ResponseEntity<ApiResponse> total(
+            org.springframework.security.core.Authentication auth) {
+
+        String email = auth.getName();
+        return ResponseEntity.ok(service.getCustomerTotalBalanceByEmail(email));
+    }
+
+>>>>>>> origin/main
 }

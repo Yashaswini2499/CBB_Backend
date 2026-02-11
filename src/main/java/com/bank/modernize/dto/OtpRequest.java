@@ -1,5 +1,6 @@
 package com.bank.modernize.dto;
 
+<<<<<<< HEAD
 public class OtpRequest {
     private String email;
     private String otp;
@@ -20,3 +21,18 @@ public class OtpRequest {
         this.otp = otp;
     }
 }
+=======
+import lombok.Data;
+
+@Data
+public class OtpRequest {
+
+    // For LOGIN OTP (Email)
+    private String email;
+
+    // For FORGOT PASSWORD OTP (Phone)
+    private String phone;
+
+    private String otp;
+}
+>>>>>>> origin/main

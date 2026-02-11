@@ -1,5 +1,6 @@
 package com.bank.modernize.dto;
 
+<<<<<<< HEAD
 public class TransactionRequest {
     private Long accountNumber;
     private double amount;
@@ -20,3 +21,13 @@ public class TransactionRequest {
         this.amount = amount;
     }
 }
+=======
+import lombok.Data;
+
+@Data
+public class TransactionRequest {
+    private Long accountNumber;
+    private double amount;
+}
+
+>>>>>>> origin/main

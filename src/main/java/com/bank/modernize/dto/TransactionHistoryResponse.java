@@ -3,6 +3,14 @@ package com.bank.modernize.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+<<<<<<< HEAD
+=======
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+>>>>>>> origin/main
 public class TransactionHistoryResponse {
 
     private Long transactionId;
@@ -12,6 +20,7 @@ public class TransactionHistoryResponse {
     private Long accountNumber;
     private BigDecimal amount;
     private String status;
+<<<<<<< HEAD
 
     public TransactionHistoryResponse(Long transactionId, LocalDateTime date, String userName, String type,
             Long accountNumber, BigDecimal amount, String status) {
@@ -79,4 +88,6 @@ public class TransactionHistoryResponse {
     public void setStatus(String status) {
         this.status = status;
     }
+=======
+>>>>>>> origin/main
 }

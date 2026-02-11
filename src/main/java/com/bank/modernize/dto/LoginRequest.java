@@ -1,4 +1,5 @@
 package com.bank.modernize.dto;
+<<<<<<< HEAD
 
 public class LoginRequest {
     private String email;
@@ -19,4 +20,12 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+=======
+import lombok.*;
+
+@Data
+public class LoginRequest {
+    private String email;
+    private String password;
+>>>>>>> origin/main
 }

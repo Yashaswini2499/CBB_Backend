@@ -1,6 +1,10 @@
 package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
+=======
+import lombok.*;
+>>>>>>> origin/main
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 
@@ -11,6 +15,10 @@ import com.bank.modernize.enums.Status;
 
 @Entity
 @Table(name = "users")
+<<<<<<< HEAD
+=======
+@Data
+>>>>>>> origin/main
 public class User {
 
     @Id
@@ -44,6 +52,15 @@ public class User {
 
     @Column(name = "mfa_enabled", nullable = false)
     private Boolean mfaEnabled = false;
+<<<<<<< HEAD
+=======
+    
+ // 🔑 Forgot password OTP (PHONE)
+    @Column(name = "reset_otp")
+    private String resetOtp;
+
+    private LocalDateTime resetOtpExpiry;
+>>>>>>> origin/main
 
     @Column(name = "otp_code")
     private String otpCode;
@@ -57,6 +74,7 @@ public class User {
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+<<<<<<< HEAD
 
     // Getters and Setters
     public Long getUserId() {
@@ -162,4 +180,6 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+=======
+>>>>>>> origin/main
 }

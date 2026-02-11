@@ -2,6 +2,7 @@ package com.bank.modernize.dto;
 
 import java.math.BigDecimal;
 
+<<<<<<< HEAD
 public class DashboardStatsResponse {
     private long totalUsers;
     private long totalTransactions;
@@ -47,3 +48,17 @@ public class DashboardStatsResponse {
         this.pendingLoans = pendingLoans;
     }
 }
+=======
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class DashboardStatsResponse {
+    private long totalUsers;
+    private long totalTransactions;
+    private BigDecimal totalRevenue;  
+    private long pendingLoans;
+}
+
+>>>>>>> origin/main

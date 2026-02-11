@@ -12,6 +12,7 @@ import com.bank.modernize.dto.TransactionHistoryResponse;
 import com.bank.modernize.dto.TransactionResponse;
 import com.bank.modernize.service.TransactionService;
 
+<<<<<<< HEAD
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
@@ -31,5 +32,29 @@ public class TransactionController {
 	public ResponseEntity<List<TransactionHistoryResponse>> getHistory() {
 		return ResponseEntity.ok(transactionService.getAllTransactions());
 	}
+=======
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/transactions")
+@RequiredArgsConstructor
+public class TransactionController {
+	
+	private final TransactionService transactionService;
+	
+	@GetMapping("/my-transactions")
+	public List<TransactionResponse> myHistory(
+	        org.springframework.security.core.Authentication auth) {
+
+	    String email = auth.getName(); 
+	    return transactionService.getCustomerTransactionsByEmail(email);
+	}
+
+	
+    @GetMapping("/history")
+    public ResponseEntity<List<TransactionHistoryResponse>> getallHistory() {
+        return ResponseEntity.ok(transactionService.getAllTransactions());
+    }
+>>>>>>> origin/main
 
 }

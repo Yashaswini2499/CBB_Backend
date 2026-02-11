@@ -6,16 +6,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
 import com.bank.modernize.dto.ApplyLoanRequest;
 import com.bank.modernize.dto.LoanResponse;
 import com.bank.modernize.service.LoanService;
 
 @RestController
 @RequestMapping("/api/loans")
+=======
+import com.bank.modernize.dto.LoanRequest;
+import com.bank.modernize.dto.LoanResponse;
+import com.bank.modernize.service.LoanService;
+
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/loans")
+@RequiredArgsConstructor
+>>>>>>> origin/main
 public class LoanController {
 
     private final LoanService loanService;
 
+<<<<<<< HEAD
     public LoanController(LoanService loanService) {
         this.loanService = loanService;
     }
@@ -23,6 +36,11 @@ public class LoanController {
     // 1. Apply loan
     @PostMapping
     public ResponseEntity<LoanResponse> applyLoan(@RequestBody ApplyLoanRequest request) {
+=======
+    // 1. Apply loan
+    @PostMapping("/apply")
+    public ResponseEntity<LoanResponse> applyLoan(@RequestBody LoanRequest request){
+>>>>>>> origin/main
         return new ResponseEntity<>(loanService.applyLoan(request), HttpStatus.CREATED);
     }
 

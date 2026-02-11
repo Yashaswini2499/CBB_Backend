@@ -1,7 +1,11 @@
 package com.bank.modernize.adapter;
 
+<<<<<<< HEAD
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+=======
+import lombok.extern.slf4j.Slf4j;
+>>>>>>> origin/main
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,10 +15,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 @Service
+<<<<<<< HEAD
 public class CobolAdapter {
 
     private static final Logger log = LoggerFactory.getLogger(CobolAdapter.class);
 
+=======
+@Slf4j
+public class CobolAdapter {
+
+>>>>>>> origin/main
     private static final String PATH = "C:/cobol/";
     private static final int TIMEOUT_MS = 5000;
 
@@ -57,6 +67,10 @@ public class CobolAdapter {
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
     public double calculateDeposit(double bal, double amount) {
         String res = runProcess("Deposit.exe", scale(bal), scale(amount));
 
@@ -64,6 +78,10 @@ public class CobolAdapter {
         return parseAmount(res);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
     public double calculateWithdraw(double balance, double amount) {
         String res = runProcess("Withdraw.exe", scale(balance), scale(amount));
 
@@ -71,9 +89,16 @@ public class CobolAdapter {
         return parseAmount(res);
     }
 
+<<<<<<< HEAD
     public double[] calculateTransfer(double fbal, double tbal, double amt) {
         String res = runProcess("Transfer.exe",
                 scale(fbal), scale(tbal), scale(amt));
+=======
+
+    public double[] calculateTransfer(double fbal, double tbal, double amt) {
+        String res = runProcess("Transfer.exe",
+        		scale(fbal), scale(tbal), scale(amt));
+>>>>>>> origin/main
 
         handleCommonErrors(res);
 
@@ -81,12 +106,19 @@ public class CobolAdapter {
         if (parts.length != 2)
             throw new RuntimeException("Invalid transfer response from COBOL");
 
+<<<<<<< HEAD
         return new double[] {
+=======
+        return new double[]{
+>>>>>>> origin/main
                 parseAmount(parts[0]),
                 parseAmount(parts[1])
         };
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     private String scale(double val) {
         return String.valueOf((long) (val * 100));
     }
@@ -109,6 +141,38 @@ public class CobolAdapter {
         return parseAmount(res);
     }
 
+<<<<<<< HEAD
+=======
+    public double calculateInterestRate(int creditScore) {
+        String res = runProcess("InterestRate.exe", String.valueOf(creditScore));
+
+        if ("REJECT".equalsIgnoreCase(res))
+            throw new RuntimeException("Loan rejected: low credit score");
+
+        try {
+            return Double.parseDouble(res.trim());
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid rate from COBOL: " + res);
+        }
+    }
+
+
+    public double calculateEmi(double loanAmount, double annualRate, int months) {
+
+        // COBOL expects amount in paise
+        String res = runProcess("EmiCalc.exe",
+                scale(loanAmount),              
+                String.valueOf(annualRate),    
+                String.valueOf(months));      
+
+        if ("INVALID".equalsIgnoreCase(res))
+            throw new RuntimeException("Invalid EMI calculation input");
+
+        return parseAmount(res); // paise → rupees
+    }
+
+    
+>>>>>>> origin/main
     private void handleCommonErrors(String res) {
         if ("INVALID".equalsIgnoreCase(res))
             throw new RuntimeException("Invalid input amount");
@@ -117,11 +181,22 @@ public class CobolAdapter {
             throw new RuntimeException("Insufficient funds");
     }
 
+<<<<<<< HEAD
     private double parseAmount(String val) {
         try {
             return Double.parseDouble(val.trim()) / 100.0;
+=======
+
+    private double parseAmount(String val) {
+        try {
+        	return Double.parseDouble(val.trim()) / 100.0;
+>>>>>>> origin/main
         } catch (Exception e) {
             throw new RuntimeException("Invalid numeric response from COBOL: " + val);
         }
     }
+<<<<<<< HEAD
+=======
+   
+>>>>>>> origin/main
 }

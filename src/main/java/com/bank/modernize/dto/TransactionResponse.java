@@ -2,6 +2,12 @@ package com.bank.modernize.dto;
 
 import java.math.BigDecimal;
 
+<<<<<<< HEAD
+=======
+import lombok.Data;
+
+@Data
+>>>>>>> origin/main
 public class TransactionResponse {
 
     private Long transactionId;
@@ -12,7 +18,11 @@ public class TransactionResponse {
     private String status;
 
     public TransactionResponse(Long transactionId, String date, String type,
+<<<<<<< HEAD
             Long account, BigDecimal amount, String status) {
+=======
+                               Long account, BigDecimal amount, String status) {
+>>>>>>> origin/main
         this.transactionId = transactionId;
         this.date = date;
         this.type = type;
@@ -21,6 +31,7 @@ public class TransactionResponse {
         this.status = status;
     }
 
+<<<<<<< HEAD
     public Long getTransactionId() {
         return transactionId;
     }
@@ -68,4 +79,6 @@ public class TransactionResponse {
     public void setStatus(String status) {
         this.status = status;
     }
+=======
+>>>>>>> origin/main
 }

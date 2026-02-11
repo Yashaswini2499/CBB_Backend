@@ -1,10 +1,21 @@
 package com.bank.modernize.dto;
 
+<<<<<<< HEAD
+=======
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+>>>>>>> origin/main
 public class LoginResponse {
 
     private String token;
     private String role;
     private String email;
+<<<<<<< HEAD
 
     public LoginResponse() {
     }
@@ -38,4 +49,6 @@ public class LoginResponse {
     public void setEmail(String email) {
         this.email = email;
     }
+=======
+>>>>>>> origin/main
 }

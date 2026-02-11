@@ -1,8 +1,16 @@
 package com.bank.modernize.dto;
+<<<<<<< HEAD
 
 import com.bank.modernize.enums.Role;
 import com.bank.modernize.enums.Status;
 
+=======
+import lombok.Data;
+import com.bank.modernize.enums.Role;
+import com.bank.modernize.enums.Status;
+
+@Data
+>>>>>>> origin/main
 public class UserResponse {
 
     private Long userId;
@@ -12,6 +20,7 @@ public class UserResponse {
     private Role role;
     private Status status;
     private boolean mfaEnabled;
+<<<<<<< HEAD
 
     public Long getUserId() {
         return userId;
@@ -68,4 +77,6 @@ public class UserResponse {
     public void setMfaEnabled(boolean mfaEnabled) {
         this.mfaEnabled = mfaEnabled;
     }
+=======
+>>>>>>> origin/main
 }

@@ -2,6 +2,10 @@ package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+<<<<<<< HEAD
+=======
+import lombok.*;
+>>>>>>> origin/main
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,6 +15,14 @@ import com.bank.modernize.enums.TxnType;
 
 @Entity
 @Table(name = "transactions")
+<<<<<<< HEAD
+=======
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+>>>>>>> origin/main
 public class Transaction {
 
     @Id
@@ -42,6 +54,7 @@ public class Transaction {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+<<<<<<< HEAD
     public Transaction() {
     }
 
@@ -112,6 +125,8 @@ public class Transaction {
         this.createdAt = createdAt;
     }
 
+=======
+>>>>>>> origin/main
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();

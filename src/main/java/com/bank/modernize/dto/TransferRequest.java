@@ -1,9 +1,16 @@
 package com.bank.modernize.dto;
 
+<<<<<<< HEAD
+=======
+import lombok.Data;
+
+@Data
+>>>>>>> origin/main
 public class TransferRequest {
     private Long fromAccountNumber;
     private Long toAccountNumber;
     private double amount;
+<<<<<<< HEAD
 
     public Long getFromAccountNumber() {
         return fromAccountNumber;
@@ -28,4 +35,6 @@ public class TransferRequest {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+=======
+>>>>>>> origin/main
 }

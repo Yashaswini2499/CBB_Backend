@@ -12,14 +12,27 @@ import com.bank.modernize.dto.TransactionHistoryResponse;
 import com.bank.modernize.dto.TransactionResponse;
 import com.bank.modernize.entity.Account;
 import com.bank.modernize.entity.Transaction;
+<<<<<<< HEAD
 import com.bank.modernize.repository.AccountRepository;
 import com.bank.modernize.repository.TransactionRepository;
 
 @Service
+=======
+import com.bank.modernize.entity.User;
+import com.bank.modernize.repository.AccountRepository;
+import com.bank.modernize.repository.TransactionRepository;
+import com.bank.modernize.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+>>>>>>> origin/main
 public class TransactionService {
 
     private final AccountRepository accountRepo;
     private final TransactionRepository transactionRepo;
+<<<<<<< HEAD
 
     public TransactionService(AccountRepository accountRepo, TransactionRepository transactionRepo) {
         this.accountRepo = accountRepo;
@@ -28,6 +41,24 @@ public class TransactionService {
 
     public List<TransactionResponse> getCustomerTransactions(Long userId) {
 
+=======
+    private final UserRepository userRepo;
+
+    
+    public List<TransactionResponse> getCustomerTransactionsByEmail(String email) {
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return getCustomerTransactions(user.getUserId());
+    }
+
+
+
+    public List<TransactionResponse> getCustomerTransactions(Long userId) {
+
+  
+>>>>>>> origin/main
         List<Account> accounts = accountRepo.findByCustomerUserId(userId);
 
         List<Long> accountIds = new ArrayList<>();
@@ -67,12 +98,21 @@ public class TransactionService {
                     txn.getTxnType().name(),
                     accountNumber,
                     txn.getAmount(),
+<<<<<<< HEAD
                     txn.getStatus().name()));
+=======
+                    txn.getStatus().name()
+            ));
+>>>>>>> origin/main
         }
 
         return response;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> origin/main
     public List<TransactionHistoryResponse> getAllTransactions() {
 
         return transactionRepo.findAllByOrderByCreatedAtDesc()
@@ -84,7 +124,12 @@ public class TransactionService {
                         txn.getTxnType().name(),
                         txn.getFromAccount().getAccountNumber(),
                         txn.getAmount(),
+<<<<<<< HEAD
                         txn.getStatus().name()))
+=======
+                        txn.getStatus().name()
+                ))
+>>>>>>> origin/main
                 .toList();
     }
 }

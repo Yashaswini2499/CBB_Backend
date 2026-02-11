@@ -1,15 +1,25 @@
 package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
+=======
+import lombok.*;
+>>>>>>> origin/main
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import com.bank.modernize.enums.AccountStatus;
 import com.bank.modernize.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<<<<<<< HEAD
 
 @Entity
 @Table(name = "accounts")
+=======
+@Entity
+@Table(name = "accounts")
+@Data
+>>>>>>> origin/main
 public class Account {
 
     @Id
@@ -20,7 +30,11 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     @NotNull
+<<<<<<< HEAD
     @JsonIgnoreProperties({ "password", "mfaSecret", "createdAt", "email", "phone", "role", "status", "mfaEnabled" })
+=======
+    @JsonIgnoreProperties({"password","mfaSecret","createdAt","email","phone","role","status","mfaEnabled"})
+>>>>>>> origin/main
     private User customer;
 
     @NotNull
@@ -44,6 +58,7 @@ public class Account {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Timestamp createdAt;
 
+<<<<<<< HEAD
     public Account() {
     }
 
@@ -103,6 +118,8 @@ public class Account {
         this.createdAt = createdAt;
     }
 
+=======
+>>>>>>> origin/main
     @PrePersist
     public void prePersist() {
         this.createdAt = new Timestamp(System.currentTimeMillis());
