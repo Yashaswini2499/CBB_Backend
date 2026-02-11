@@ -1,38 +1,17 @@
 package com.bank.modernize.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.enums.LoanType;
 
-<<<<<<< HEAD
-public class LoanResponse {
+public class ApplyLoanRequest {
 
-=======
-import lombok.Data;
-
-@Data
-public class LoanResponse {
->>>>>>> origin/main
-    private Long loanId;
     private Long customerId;
     private BigDecimal salary;
     private BigDecimal loanAmount;
     private Integer creditScore;
     private LoanType loanType;
-<<<<<<< HEAD
     private BigDecimal emi;
-    private LoanStatus status;
-    private LocalDateTime createdAt;
-
-    public Long getLoanId() {
-        return loanId;
-    }
-
-    public void setLoanId(Long loanId) {
-        this.loanId = loanId;
-    }
 
     public Long getCustomerId() {
         return customerId;
@@ -81,27 +60,4 @@ public class LoanResponse {
     public void setEmi(BigDecimal emi) {
         this.emi = emi;
     }
-
-    public LoanStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(LoanStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-=======
-    private Integer tenureMonths;
-    private BigDecimal emi;
-    private BigDecimal annualInterestRate; 
-    private LoanStatus status;
-    private LocalDateTime createdAt;
->>>>>>> origin/main
 }

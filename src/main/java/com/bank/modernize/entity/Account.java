@@ -1,16 +1,25 @@
 package com.bank.modernize.entity;
 
 import jakarta.persistence.*;
+<<<<<<< HEAD
+=======
 import lombok.*;
+>>>>>>> origin/main
 import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import com.bank.modernize.enums.AccountStatus;
 import com.bank.modernize.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<<<<<<< HEAD
+
+@Entity
+@Table(name = "accounts")
+=======
 @Entity
 @Table(name = "accounts")
 @Data
+>>>>>>> origin/main
 public class Account {
 
     @Id
@@ -21,7 +30,11 @@ public class Account {
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     @NotNull
+<<<<<<< HEAD
+    @JsonIgnoreProperties({ "password", "mfaSecret", "createdAt", "email", "phone", "role", "status", "mfaEnabled" })
+=======
     @JsonIgnoreProperties({"password","mfaSecret","createdAt","email","phone","role","status","mfaEnabled"})
+>>>>>>> origin/main
     private User customer;
 
     @NotNull
@@ -45,6 +58,68 @@ public class Account {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Timestamp createdAt;
 
+<<<<<<< HEAD
+    public Account() {
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public User getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(User customer) {
+        this.customer = customer;
+    }
+
+    public Long getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(Long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public AccountStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AccountStatus status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+=======
+>>>>>>> origin/main
     @PrePersist
     public void prePersist() {
         this.createdAt = new Timestamp(System.currentTimeMillis());

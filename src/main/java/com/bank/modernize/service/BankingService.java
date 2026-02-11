@@ -6,22 +6,38 @@ import com.bank.modernize.entity.*;
 import com.bank.modernize.enums.*;
 import com.bank.modernize.repository.*;
 import jakarta.transaction.Transactional;
+<<<<<<< HEAD
+
+=======
 import lombok.RequiredArgsConstructor;
+>>>>>>> origin/main
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+<<<<<<< HEAD
+=======
 @RequiredArgsConstructor
+>>>>>>> origin/main
 public class BankingService {
 
     private final AccountRepository repo;
     private final CobolAdapter cobol;
     private final TxnLogService txnLogService;
+<<<<<<< HEAD
+
+    public BankingService(AccountRepository repo, CobolAdapter cobol, TxnLogService txnLogService) {
+        this.repo = repo;
+        this.cobol = cobol;
+        this.txnLogService = txnLogService;
+    }
+=======
     private final UserRepository userRepo;
 
 
+>>>>>>> origin/main
 
     @Transactional
     public ApiResponse deposit(TransactionRequest req) {
@@ -29,20 +45,32 @@ public class BankingService {
         Account acc = repo.findByAccountNumber(req.getAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
+<<<<<<< HEAD
+        Transaction txn = new Transaction();
+        txn.setFromAccount(acc);
+        txn.setTxnType(TxnType.DEPOSIT);
+        txn.setAmount(BigDecimal.valueOf(req.getAmount()));
+        txn.setStatus(TxnStatus.PENDING);
+=======
         Transaction txn = Transaction.builder()
                 .fromAccount(acc)
                 .txnType(TxnType.DEPOSIT)
                 .amount(BigDecimal.valueOf(req.getAmount()))
                 .status(TxnStatus.PENDING)
                 .build();
+>>>>>>> origin/main
 
         txn = txnLogService.save(txn);
 
         try {
             double newBal = cobol.calculateDeposit(
                     acc.getBalance().doubleValue(),
+<<<<<<< HEAD
+                    req.getAmount());
+=======
                     req.getAmount()
             );
+>>>>>>> origin/main
 
             acc.setBalance(BigDecimal.valueOf(newBal));
             repo.save(acc);
@@ -59,27 +87,42 @@ public class BankingService {
         }
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
     @Transactional
     public ApiResponse withdraw(TransactionRequest req) {
 
         Account acc = repo.findByAccountNumber(req.getAccountNumber())
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
+<<<<<<< HEAD
+        Transaction txn = new Transaction();
+        txn.setFromAccount(acc);
+        txn.setTxnType(TxnType.WITHDRAW);
+        txn.setAmount(BigDecimal.valueOf(req.getAmount()));
+        txn.setStatus(TxnStatus.PENDING);
+=======
         Transaction txn = Transaction.builder()
                 .fromAccount(acc)
                 .txnType(TxnType.WITHDRAW)
                 .amount(BigDecimal.valueOf(req.getAmount()))
                 .status(TxnStatus.PENDING)
                 .build();
+>>>>>>> origin/main
 
         txn = txnLogService.save(txn);
 
         try {
             double newBal = cobol.calculateWithdraw(
                     acc.getBalance().doubleValue(),
+<<<<<<< HEAD
+                    req.getAmount());
+=======
                     req.getAmount()
             );
+>>>>>>> origin/main
 
             acc.setBalance(BigDecimal.valueOf(newBal));
             repo.save(acc);
@@ -96,7 +139,10 @@ public class BankingService {
         }
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
     @Transactional
     public ApiResponse transfer(TransferRequest req) {
 
@@ -106,6 +152,14 @@ public class BankingService {
         Account to = repo.findByAccountNumber(req.getToAccountNumber())
                 .orElseThrow(() -> new RuntimeException("To account not found"));
 
+<<<<<<< HEAD
+        Transaction txn = new Transaction();
+        txn.setFromAccount(from);
+        txn.setToAccount(to);
+        txn.setTxnType(TxnType.TRANSFER);
+        txn.setAmount(BigDecimal.valueOf(req.getAmount()));
+        txn.setStatus(TxnStatus.PENDING);
+=======
         Transaction txn = Transaction.builder()
                 .fromAccount(from)
                 .toAccount(to)
@@ -113,6 +167,7 @@ public class BankingService {
                 .amount(BigDecimal.valueOf(req.getAmount()))
                 .status(TxnStatus.PENDING)
                 .build();
+>>>>>>> origin/main
 
         txn = txnLogService.save(txn);
 
@@ -120,8 +175,12 @@ public class BankingService {
             double[] res = cobol.calculateTransfer(
                     from.getBalance().doubleValue(),
                     to.getBalance().doubleValue(),
+<<<<<<< HEAD
+                    req.getAmount());
+=======
                     req.getAmount()
             );
+>>>>>>> origin/main
 
             from.setBalance(BigDecimal.valueOf(res[0]));
             to.setBalance(BigDecimal.valueOf(res[1]));
@@ -140,6 +199,9 @@ public class BankingService {
             throw e;
         }
     }
+<<<<<<< HEAD
+
+=======
     
     @Transactional
     public ApiResponse getCustomerTotalBalanceByEmail(String email) {
@@ -150,6 +212,7 @@ public class BankingService {
         return getCustomerTotalBalance(user.getUserId());
     }
     
+>>>>>>> origin/main
     @Transactional
     public ApiResponse getCustomerTotalBalance(Long userId) {
 
@@ -161,7 +224,11 @@ public class BankingService {
         List<Long> balancesInCents = new ArrayList<>();
 
         for (Account acc : accounts) {
+<<<<<<< HEAD
+            BigDecimal cents = acc.getBalance().movePointRight(2);
+=======
             BigDecimal cents = acc.getBalance().movePointRight(2); 
+>>>>>>> origin/main
             balancesInCents.add(cents.longValueExact());
         }
 
@@ -170,5 +237,8 @@ public class BankingService {
         return new ApiResponse("SUCCESS", "Total balance calculated", total);
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 }

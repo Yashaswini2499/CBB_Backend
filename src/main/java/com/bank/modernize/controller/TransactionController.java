@@ -12,6 +12,27 @@ import com.bank.modernize.dto.TransactionHistoryResponse;
 import com.bank.modernize.dto.TransactionResponse;
 import com.bank.modernize.service.TransactionService;
 
+<<<<<<< HEAD
+@RestController
+@RequestMapping("/transactions")
+public class TransactionController {
+
+	private final TransactionService transactionService;
+
+	public TransactionController(TransactionService transactionService) {
+		this.transactionService = transactionService;
+	}
+
+	@GetMapping("/customer/{userId}")
+	public List<TransactionResponse> history(@PathVariable Long userId) {
+		return transactionService.getCustomerTransactions(userId);
+	}
+
+	@GetMapping("/history")
+	public ResponseEntity<List<TransactionHistoryResponse>> getHistory() {
+		return ResponseEntity.ok(transactionService.getAllTransactions());
+	}
+=======
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,5 +55,6 @@ public class TransactionController {
     public ResponseEntity<List<TransactionHistoryResponse>> getallHistory() {
         return ResponseEntity.ok(transactionService.getAllTransactions());
     }
+>>>>>>> origin/main
 
 }
