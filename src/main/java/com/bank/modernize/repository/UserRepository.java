@@ -8,7 +8,7 @@ import com.bank.modernize.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByResetToken(String resetToken);
+    Optional<User> findByResetToken(String Token);
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
     boolean existsByUserId(Long userId);

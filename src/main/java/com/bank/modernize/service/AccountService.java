@@ -30,18 +30,17 @@ public class AccountService {
     private final UserRepository userRepo;
     private final TransactionRepository transactionRepo;
 
-    public List<Account> getAccountsOfCustomer(Long userId) {
-        return accountRepo.findByCustomerUserId(userId);
-    }
-
+    // =========================
+    // CREATE ACCOUNT FOR LOGGED-IN USER
+    // =========================
     @Transactional
-    public AccountResponse createAccount(CreateAccountRequest request) {
+    public AccountResponse createAccountForLoggedInUser(CreateAccountRequest request, String email) {
 
-        User customer = userRepo.findById(request.getCustomerId())
+        User customer = userRepo.findByEmail(email)
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Customer not found"));
+                                "User not found"));
 
         if (customer.getStatus() != Status.ACTIVE) {
             throw new ResponseStatusException(
@@ -72,8 +71,13 @@ public class AccountService {
         acc.setStatus(AccountStatus.ACTIVE);
 
         accountRepo.save(acc);
+
         return mapToResponse(acc);
     }
+
+    // =========================
+    // OTHER METHODS (UNCHANGED)
+    // =========================
 
     public AccountResponse getAccountById(Long accountId) {
 
@@ -140,10 +144,6 @@ public class AccountService {
         accountRepo.deleteByCustomerUserId(customerId);
     }
 
-    // =========================
-    // HELPER METHODS
-    // =========================
-
     private AccountResponse mapToResponse(Account acc) {
 
         AccountResponse res = new AccountResponse();
@@ -170,9 +170,6 @@ public class AccountService {
         return number;
     }
 
-    // =========================
-    // GET ACCOUNTS BY EMAIL
-    // =========================
     public List<AccountResponse> getAccountsByEmail(String email) {
 
         User user = userRepo.findByEmail(email)

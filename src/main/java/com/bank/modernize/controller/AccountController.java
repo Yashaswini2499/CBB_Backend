@@ -20,15 +20,18 @@ public class AccountController {
     private final AccountService accountService;
 
     // =========================
-    // CREATE ACCOUNT
+    // CREATE ACCOUNT (LOGGED-IN USER)
     // =========================
     @PostMapping("/create")
     public ResponseEntity<AccountResponse> createAccount(
-            @RequestBody CreateAccountRequest request) {
+            @RequestBody CreateAccountRequest request,
+            org.springframework.security.core.Authentication auth) {
+
+        String email = auth.getName();   // email from JWT
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(accountService.createAccount(request));
+                .body(accountService.createAccountForLoggedInUser(request, email));
     }
 
     // =========================
@@ -64,7 +67,7 @@ public class AccountController {
     }
 
     // =========================
-    // GET LOGGED-IN USER ACCOUNTS (BALANCE)
+    // GET LOGGED-IN USER ACCOUNTS
     // =========================
     @GetMapping("/my-accounts")
     public ResponseEntity<List<AccountResponse>> getMyAccounts(
