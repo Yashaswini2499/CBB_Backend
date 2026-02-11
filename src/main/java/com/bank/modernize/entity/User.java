@@ -46,6 +46,12 @@ public class User {
 
     @Column(name = "mfa_enabled", nullable = false)
     private Boolean mfaEnabled = false;
+    
+ // 🔑 Forgot password OTP (PHONE)
+    @Column(name = "reset_otp")
+    private String resetOtp;
+
+    private LocalDateTime resetOtpExpiry;
 
     @Column(name = "otp_code")
     private String otpCode;
