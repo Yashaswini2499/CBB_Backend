@@ -52,14 +52,16 @@ public class SecurityConfig {
                 // Public AUTH APIs
                 .requestMatchers("/auth/**").permitAll()
 
+                // 🟢 ADMIN APIs (Dashboard)
+                .requestMatchers("/admin/**").permitAll()   // ← change to hasRole("ADMIN") later
+
                 // Public APIs (for now — debugging)
                 .requestMatchers(
                         "/accounts/**",
                         "/transactions/**",
                         "/users/**",
                         "/bank/**",
-                        "/api/loans/**",
-                        "/admin/dashboard/**"
+                        "/api/loans/**"
                 ).permitAll()
 
                 // All other requests require authentication
