@@ -22,56 +22,57 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtFilter;
 
+    // 🔐 Password Encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // 🔐 Security Filter
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            // 🔴 Disable CSRF (VERY IMPORTANT)
+            // Disable CSRF
             .csrf(csrf -> csrf.disable())
 
-            // 🔴 Enable CORS
+            // Enable CORS
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-            // 🔴 Stateless session (JWT)
+            // Stateless session (JWT)
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
+            // Authorization rules
             .authorizeHttpRequests(auth -> auth
-<<<<<<< HEAD
 
-                // Allow preflight
+                // Allow preflight requests
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                // 🔓 PUBLIC AUTH APIs
+                // Public AUTH APIs
                 .requestMatchers("/auth/**").permitAll()
 
-                // Allow all for now (to debug easily)
-                .anyRequest().permitAll()
-=======
+                // Public APIs (for now — debugging)
                 .requestMatchers(
-                    "/auth/**",
-                    "/accounts/**",
-                    "/transactions/**",
-                    "/users/**",
-                    "/bank/**",
-                    "/api/loans/**",
-                    "/admin/dashboard/**"
+                        "/accounts/**",
+                        "/transactions/**",
+                        "/users/**",
+                        "/bank/**",
+                        "/api/loans/**",
+                        "/admin/dashboard/**"
                 ).permitAll()
+
+                // All other requests require authentication
                 .anyRequest().authenticated()
->>>>>>> 53199adc3e9dd58b9d60cf39c1e98122562cfb27
             )
 
-            // 🔴 Add JWT Filter AFTER auth rules
+            // Add JWT filter
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+    // 🌐 CORS Configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
