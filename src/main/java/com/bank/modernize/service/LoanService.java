@@ -16,6 +16,8 @@ import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.enums.LoanType;
 import com.bank.modernize.repository.LoanRepository;
 import com.bank.modernize.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -31,34 +33,37 @@ public class LoanService {
     @Transactional
     public LoanResponse applyLoan(LoanRequest dto) {
 
-        User user = userRepo.findById(dto.getCustomerId())
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
+    	String email = SecurityContextHolder.getContext()
+    	        .getAuthentication()
+    	        .getName();
+
+    	User user = userRepo.findByEmail(email)
+    	        .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+
+        double rate = cobol.calculateInterestRate(dto.getCreditScore());
+
+        double emi = cobol.calculateEmi(
+                dto.getLoanAmount().doubleValue(),
+                rate,
+                dto.getTenureMonths()
+        );
 
         Loan loan = Loan.builder()
-                .customer(user)   
+                .customer(user)
                 .salary(dto.getSalary())
                 .loanAmount(dto.getLoanAmount())
                 .creditScore(dto.getCreditScore())
                 .loanType(LoanType.valueOf(dto.getLoanType()))
                 .tenureMonths(dto.getTenureMonths())
-                .status(LoanStatus.PENDING)
+                .annualInterestRate(BigDecimal.valueOf(rate))
+                .emi(BigDecimal.valueOf(emi))
+                .status(LoanStatus.PENDING) 
                 .build();
-
-        loanRepository.save(loan);
-
-        // 🔥 COBOL Calls
-        double rate = cobol.calculateInterestRate(loan.getCreditScore());
-        double emi = cobol.calculateEmi(
-                loan.getLoanAmount().doubleValue(),
-                rate,
-                loan.getTenureMonths()
-        );
-
-        loan.setAnnualInterestRate(BigDecimal.valueOf(rate));
-        loan.setEmi(BigDecimal.valueOf(emi));
 
         return mapToResponse(loanRepository.save(loan));
     }
+
 
     // Approve loan
     public LoanResponse approveLoan(Long loanId) {
@@ -95,15 +100,17 @@ public class LoanService {
     private LoanResponse mapToResponse(Loan loan) {
         LoanResponse res = new LoanResponse();
         res.setLoanId(loan.getLoanId());
-        res.setCustomerId(loan.getCustomer().getUserId()); 
+        res.setCustomerId(loan.getCustomer().getUserId());
         res.setSalary(loan.getSalary());
         res.setLoanAmount(loan.getLoanAmount());
         res.setCreditScore(loan.getCreditScore());
         res.setLoanType(loan.getLoanType());
         res.setEmi(loan.getEmi());
-        res.setAnnualInterestRate(loan.getAnnualInterestRate()); 
+        res.setAnnualInterestRate(loan.getAnnualInterestRate());
+        res.setTenureMonths(loan.getTenureMonths()); 
         res.setStatus(loan.getStatus());
         res.setCreatedAt(loan.getCreatedAt());
         return res;
     }
+
 }

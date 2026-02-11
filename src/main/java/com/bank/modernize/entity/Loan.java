@@ -8,14 +8,19 @@ import com.bank.modernize.enums.LoanType;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 @Builder
 @Entity
 @Table(name = "loans")
 @Data
+@NoArgsConstructor   
+@AllArgsConstructor
 public class Loan {
 
     @Id

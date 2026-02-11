@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.bank.modernize.dto.LoanRequest;
 import com.bank.modernize.dto.LoanResponse;
+import com.bank.modernize.entity.User;
+import com.bank.modernize.repository.UserRepository;
 import com.bank.modernize.service.LoanService;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class LoanController {
 
     private final LoanService loanService;
+    private final UserRepository userRepo;
 
     // 1. Apply loan
     @PostMapping("/apply")
@@ -38,11 +42,20 @@ public class LoanController {
     }
 
     // 4. Get all loans of customer
-    @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<LoanResponse>> getLoansByCustomer(
-            @PathVariable Long customerId) {
-        return ResponseEntity.ok(loanService.getLoansByCustomer(customerId));
+    @GetMapping("/customer")
+    public ResponseEntity<List<LoanResponse>> getMyLoans(
+            org.springframework.security.core.Authentication auth) {
+
+        String email = auth.getName();  
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "User not found"));
+
+        return ResponseEntity.ok(
+                loanService.getLoansByCustomer(user.getUserId()));
     }
+
 
     // 5. Get loan by ID
     @GetMapping("/{loanId}")
