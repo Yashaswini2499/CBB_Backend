@@ -42,6 +42,7 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
             .authorizeHttpRequests(auth -> auth
+<<<<<<< HEAD
 
                 // Allow preflight
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
@@ -51,6 +52,18 @@ public class SecurityConfig {
 
                 // Allow all for now (to debug easily)
                 .anyRequest().permitAll()
+=======
+                .requestMatchers(
+                    "/auth/**",
+                    "/accounts/**",
+                    "/transactions/**",
+                    "/users/**",
+                    "/bank/**",
+                    "/api/loans/**",
+                    "/admin/dashboard/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+>>>>>>> 53199adc3e9dd58b9d60cf39c1e98122562cfb27
             )
 
             // 🔴 Add JWT Filter AFTER auth rules
