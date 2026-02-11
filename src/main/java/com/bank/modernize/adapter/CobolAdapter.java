@@ -1,7 +1,6 @@
 package com.bank.modernize.adapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -11,9 +10,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CobolAdapter {
-
-    private static final Logger log = LoggerFactory.getLogger(CobolAdapter.class);
 
     private static final String PATH = "C:/cobol/";
     private static final int TIMEOUT_MS = 5000;
@@ -57,12 +55,14 @@ public class CobolAdapter {
         }
     }
 
+
     public double calculateDeposit(double bal, double amount) {
         String res = runProcess("Deposit.exe", scale(bal), scale(amount));
 
         handleCommonErrors(res);
         return parseAmount(res);
     }
+
 
     public double calculateWithdraw(double balance, double amount) {
         String res = runProcess("Withdraw.exe", scale(balance), scale(amount));
@@ -71,9 +71,10 @@ public class CobolAdapter {
         return parseAmount(res);
     }
 
+
     public double[] calculateTransfer(double fbal, double tbal, double amt) {
         String res = runProcess("Transfer.exe",
-                scale(fbal), scale(tbal), scale(amt));
+        		scale(fbal), scale(tbal), scale(amt));
 
         handleCommonErrors(res);
 
@@ -81,12 +82,11 @@ public class CobolAdapter {
         if (parts.length != 2)
             throw new RuntimeException("Invalid transfer response from COBOL");
 
-        return new double[] {
+        return new double[]{
                 parseAmount(parts[0]),
                 parseAmount(parts[1])
         };
     }
-
     private String scale(double val) {
         return String.valueOf((long) (val * 100));
     }
@@ -109,6 +109,9 @@ public class CobolAdapter {
         return parseAmount(res);
     }
 
+
+
+    
     private void handleCommonErrors(String res) {
         if ("INVALID".equalsIgnoreCase(res))
             throw new RuntimeException("Invalid input amount");
@@ -117,9 +120,10 @@ public class CobolAdapter {
             throw new RuntimeException("Insufficient funds");
     }
 
+
     private double parseAmount(String val) {
         try {
-            return Double.parseDouble(val.trim()) / 100.0;
+        	return Double.parseDouble(val.trim()) / 100.0;
         } catch (Exception e) {
             throw new RuntimeException("Invalid numeric response from COBOL: " + val);
         }

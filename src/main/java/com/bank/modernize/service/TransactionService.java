@@ -8,26 +8,24 @@ import java.util.Collections;
 
 import org.springframework.stereotype.Service;
 
-import com.bank.modernize.dto.TransactionHistoryResponse;
 import com.bank.modernize.dto.TransactionResponse;
 import com.bank.modernize.entity.Account;
 import com.bank.modernize.entity.Transaction;
 import com.bank.modernize.repository.AccountRepository;
 import com.bank.modernize.repository.TransactionRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class TransactionService {
 
     private final AccountRepository accountRepo;
     private final TransactionRepository transactionRepo;
 
-    public TransactionService(AccountRepository accountRepo, TransactionRepository transactionRepo) {
-        this.accountRepo = accountRepo;
-        this.transactionRepo = transactionRepo;
-    }
-
     public List<TransactionResponse> getCustomerTransactions(Long userId) {
 
+  
         List<Account> accounts = accountRepo.findByCustomerUserId(userId);
 
         List<Long> accountIds = new ArrayList<>();
@@ -67,24 +65,10 @@ public class TransactionService {
                     txn.getTxnType().name(),
                     accountNumber,
                     txn.getAmount(),
-                    txn.getStatus().name()));
+                    txn.getStatus().name()
+            ));
         }
 
         return response;
-    }
-
-    public List<TransactionHistoryResponse> getAllTransactions() {
-
-        return transactionRepo.findAllByOrderByCreatedAtDesc()
-                .stream()
-                .map(txn -> new TransactionHistoryResponse(
-                        txn.getTxnId(),
-                        txn.getCreatedAt(),
-                        txn.getFromAccount().getCustomer().getFullName(),
-                        txn.getTxnType().name(),
-                        txn.getFromAccount().getAccountNumber(),
-                        txn.getAmount(),
-                        txn.getStatus().name()))
-                .toList();
     }
 }

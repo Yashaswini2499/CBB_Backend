@@ -1,5 +1,6 @@
 package com.bank.modernize.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,13 +17,10 @@ import java.util.List;
 import com.bank.modernize.security.JwtAuthFilter;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtFilter;
-
-    public SecurityConfig(JwtAuthFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -33,28 +31,30 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                // Disable CSRF
-                .csrf(csrf -> csrf.disable())
+            // 🔴 Disable CSRF (VERY IMPORTANT)
+            .csrf(csrf -> csrf.disable())
 
-                // Enable CORS
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            // 🔴 Enable CORS
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // Stateless session
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            // 🔴 Stateless session (JWT)
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                .authorizeHttpRequests(auth -> auth
+            .authorizeHttpRequests(auth -> auth
 
-                        // Allow preflight
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                // Allow preflight
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // Public login/signup APIs
-                        .requestMatchers("/auth/**").permitAll()
+                // 🔓 PUBLIC AUTH APIs
+                .requestMatchers("/auth/**").permitAll()
 
-                        // Secure everything else
-                        .anyRequest().authenticated())
+                // Allow all for now (to debug easily)
+                .anyRequest().permitAll()
+            )
 
-                // Add JWT filter
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            // 🔴 Add JWT Filter AFTER auth rules
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

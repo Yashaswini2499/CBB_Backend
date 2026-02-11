@@ -13,15 +13,14 @@ import com.bank.modernize.dto.TransactionRequest;
 import com.bank.modernize.dto.TransferRequest;
 import com.bank.modernize.service.BankingService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/bank")
+@RequiredArgsConstructor
 public class BankingController {
 
     private final BankingService service;
-
-    public BankingController(BankingService service) {
-        this.service = service;
-    }
 
     @PostMapping("/deposit")
     public ApiResponse deposit(@RequestBody TransactionRequest req) throws Exception {
@@ -37,7 +36,7 @@ public class BankingController {
     public ApiResponse transfer(@RequestBody TransferRequest req) throws Exception {
         return service.transfer(req);
     }
-
+    
     @GetMapping("/customer/{userId}/total-balance")
     public ResponseEntity<ApiResponse> total(@PathVariable Long userId) {
         return ResponseEntity.ok(service.getCustomerTotalBalance(userId));

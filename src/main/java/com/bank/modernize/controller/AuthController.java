@@ -1,27 +1,23 @@
 package com.bank.modernize.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bank.modernize.dto.*;
 import com.bank.modernize.service.AuthService;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;   
 import java.util.Date;
-import com.bank.modernize.security.JwtUtil;
+import com.bank.modernize.security.JwtUtil;       
 import com.bank.modernize.security.RevokedTokenService;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService service;
-    private final JwtUtil jwtUtil;
-    private final RevokedTokenService revokedTokenService;
-
-    public AuthController(AuthService service, JwtUtil jwtUtil, RevokedTokenService revokedTokenService) {
-        this.service = service;
-        this.jwtUtil = jwtUtil;
-        this.revokedTokenService = revokedTokenService;
-    }
+    private final JwtUtil jwtUtil;                   
+    private final RevokedTokenService revokedTokenService; 
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest req) {
@@ -48,7 +44,7 @@ public class AuthController {
     public void reset(@RequestBody ResetPasswordRequest req) {
         service.resetPassword(req.getToken(), req.getNewPassword());
     }
-
+    
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request) {
 

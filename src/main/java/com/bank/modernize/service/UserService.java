@@ -10,14 +10,13 @@ import com.bank.modernize.entity.User;
 import com.bank.modernize.enums.Status;
 import com.bank.modernize.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepo;
-
-    public UserService(UserRepository userRepo) {
-        this.userRepo = userRepo;
-    }
 
     @Transactional
     public UserResponse createUser(CreateUserRequest req) {
@@ -44,7 +43,8 @@ public class UserService {
     public UserResponse updateUser(Long userId, UpdateUserRequest req) {
 
         User user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
         if (req.getFullName() != null)
             user.setFullName(req.getFullName());
@@ -67,7 +67,8 @@ public class UserService {
     public String deleteUser(Long userId) {
 
         User user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
         // Soft delete
         user.setStatus(Status.INACTIVE);
@@ -76,6 +77,7 @@ public class UserService {
 
         return "User deactivated successfully";
     }
+
 
     // =========================
     // HELPER METHOD

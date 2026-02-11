@@ -18,11 +18,10 @@ public class JwtUtil {
     }
 
     // ================= GENERATE TOKEN =================
-    public String generateToken(String email, String role, Long userId) {
+    public String generateToken(String email, String role) {
         return Jwts.builder()
                 .setSubject(email)
                 .claim("role", role)
-                .claim("userId", userId)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -37,11 +36,6 @@ public class JwtUtil {
     // ================= EXTRACT ROLE =================
     public String extractRole(String token) {
         return (String) getClaims(token).get("role");
-    }
-
-    // ================= EXTRACT USER ID =================
-    public Long extractUserId(String token) {
-        return getClaims(token).get("userId", Long.class);
     }
 
     // ================= EXTRACT EXPIRATION (FIX) =================

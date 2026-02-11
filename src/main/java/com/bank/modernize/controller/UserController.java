@@ -1,5 +1,4 @@
 package com.bank.modernize.controller;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,19 +10,16 @@ import com.bank.modernize.dto.UserResponse;
 import com.bank.modernize.service.AccountService;
 import com.bank.modernize.service.UserService;
 
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final AccountService accountService;
-
-    public UserController(UserService userService, AccountService accountService) {
-        this.userService = userService;
-        this.accountService = accountService;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<UserResponse> createUser(
@@ -35,15 +31,15 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(response);
     }
-
     @GetMapping("/{userId}/accounts")
     public ResponseEntity<List<AccountResponse>> getAccountsByUserId(
             @PathVariable Long userId) {
 
         return ResponseEntity.ok(
-                accountService.getAccountsByCustomerId(userId));
+                accountService.getAccountsByCustomerId(userId)
+        );
     }
-
+    
     @PutMapping("/{userId}")
     public ResponseEntity<UserResponse> updateUser(
             @PathVariable Long userId,
@@ -52,10 +48,10 @@ public class UserController {
         return ResponseEntity.ok(
                 userService.updateUser(userId, request));
     }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
-
+    
 }
