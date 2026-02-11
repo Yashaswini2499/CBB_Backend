@@ -1,0 +1,35 @@
+package com.bank.modernize.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bank.modernize.dto.TransactionHistoryResponse;
+import com.bank.modernize.dto.TransactionResponse;
+import com.bank.modernize.service.TransactionService;
+
+@RestController
+@RequestMapping("/transactions")
+public class TransactionController {
+
+	private final TransactionService transactionService;
+
+	public TransactionController(TransactionService transactionService) {
+		this.transactionService = transactionService;
+	}
+
+	@GetMapping("/customer/{userId}")
+	public List<TransactionResponse> history(@PathVariable Long userId) {
+		return transactionService.getCustomerTransactions(userId);
+	}
+
+	@GetMapping("/history")
+	public ResponseEntity<List<TransactionHistoryResponse>> getHistory() {
+		return ResponseEntity.ok(transactionService.getAllTransactions());
+	}
+
+}
