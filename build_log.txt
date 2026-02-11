@@ -1,0 +1,629 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< com.bank:modernize >-------------------------
+[INFO] Building CBB-BACKEND 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ modernize ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ modernize ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 62 source files with javac [debug release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/controller/TransactionController.java:[22,42] variable transactionService not initialized in the default constructor
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[34,31] cannot find symbol
+  symbol:   method getAccountId()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[44,27] cannot find symbol
+  symbol:   method getTxnId()
+  location: variable t of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[49,49] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable b of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[49,76] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable a of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[57,40] cannot find symbol
+  symbol:   method getFromAccount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[58,36] cannot find symbol
+  symbol:   method getFromAccount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[60,36] cannot find symbol
+  symbol:   method getToAccount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[64,24] cannot find symbol
+  symbol:   method getTxnId()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[65,24] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[66,24] cannot find symbol
+  symbol:   method getTxnType()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[68,24] cannot find symbol
+  symbol:   method getAmount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[69,24] cannot find symbol
+  symbol:   method getStatus()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[87,28] cannot find symbol
+  symbol:   method getStatus()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[86,28] cannot find symbol
+  symbol:   method getAmount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[85,28] cannot find symbol
+  symbol:   method getFromAccount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[84,28] cannot find symbol
+  symbol:   method getTxnType()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[83,28] cannot find symbol
+  symbol:   method getFromAccount()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[82,28] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[81,28] cannot find symbol
+  symbol:   method getTxnId()
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[89,24] incompatible types: java.util.List<java.lang.Object> cannot be converted to java.util.List<com.bank.modernize.dto.TransactionHistoryResponse>
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[36,33] cannot find symbol
+  symbol:   method getEmail()
+  location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[40,29] cannot find symbol
+  symbol:   method getFullName()
+  location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[41,26] cannot find symbol
+  symbol:   method getEmail()
+  location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[42,26] cannot find symbol
+  symbol:   method getPhone()
+  location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[43,44] cannot find symbol
+  symbol:   method getPassword()
+  location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[74,41] cannot find symbol
+  symbol:   method getEmail()
+  location: variable req of type com.bank.modernize.dto.OtpRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[80,33] cannot find symbol
+  symbol:   method getOtp()
+  location: variable req of type com.bank.modernize.dto.OtpRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[27,51] cannot find symbol
+  symbol:   method getAccountNumber()
+  location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[30,38] cannot find symbol
+  symbol:   method builder()
+  location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[33,47] cannot find symbol
+  symbol:   method getAmount()
+  location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[41,24] cannot find symbol
+  symbol:   method getBalance()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[42,24] cannot find symbol
+  symbol:   method getAmount()
+  location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[45,16] cannot find symbol
+  symbol:   method setBalance(java.math.BigDecimal)
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[48,16] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[51,71] cannot find symbol
+  symbol:   method getBalance()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[54,16] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[64,51] cannot find symbol
+  symbol:   method getAccountNumber()
+  location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[67,38] cannot find symbol
+  symbol:   method builder()
+  location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[70,47] cannot find symbol
+  symbol:   method getAmount()
+  location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[78,24] cannot find symbol
+  symbol:   method getBalance()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[79,24] cannot find symbol
+  symbol:   method getAmount()
+  location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[82,16] cannot find symbol
+  symbol:   method setBalance(java.math.BigDecimal)
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[85,16] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[88,74] cannot find symbol
+  symbol:   method getBalance()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[91,16] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[101,52] cannot find symbol
+  symbol:   method getFromAccountNumber()
+  location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[104,50] cannot find symbol
+  symbol:   method getToAccountNumber()
+  location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[107,38] cannot find symbol
+  symbol:   method builder()
+  location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[111,47] cannot find symbol
+  symbol:   method getAmount()
+  location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[119,25] cannot find symbol
+  symbol:   method getBalance()
+  location: variable from of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[120,23] cannot find symbol
+  symbol:   method getBalance()
+  location: variable to of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[121,24] cannot find symbol
+  symbol:   method getAmount()
+  location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[124,17] cannot find symbol
+  symbol:   method setBalance(java.math.BigDecimal)
+  location: variable from of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[125,15] cannot find symbol
+  symbol:   method setBalance(java.math.BigDecimal)
+  location: variable to of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[130,16] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[136,16] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+  location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[153,35] cannot find symbol
+  symbol:   method getBalance()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/adapter/CobolAdapter.java:[44,13] cannot find symbol
+  symbol:   variable log
+  location: class com.bank.modernize.adapter.CobolAdapter
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/adapter/CobolAdapter.java:[53,13] cannot find symbol
+  symbol:   variable log
+  location: class com.bank.modernize.adapter.CobolAdapter
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[51,20] cannot find symbol
+  symbol:   method getAccountType()
+  location: variable request of type com.bank.modernize.dto.CreateAccountRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[57,37] cannot find symbol
+  symbol:   method getInitialDeposit()
+  location: variable request of type com.bank.modernize.dto.CreateAccountRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[67,12] cannot find symbol
+  symbol:   method setCustomer(com.bank.modernize.entity.User)
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[68,12] cannot find symbol
+  symbol:   method setAccountNumber(java.lang.Long)
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[69,35] cannot find symbol
+  symbol:   method getAccountType()
+  location: variable request of type com.bank.modernize.dto.CreateAccountRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[70,12] cannot find symbol
+  symbol:   method setBalance(java.math.BigDecimal)
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[71,12] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.AccountStatus)
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[150,29] cannot find symbol
+  symbol:   method getAccountId()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[151,30] cannot find symbol
+  symbol:   method getCustomer()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[152,33] cannot find symbol
+  symbol:   method getAccountNumber()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[153,31] cannot find symbol
+  symbol:   method getAccountType()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[154,27] cannot find symbol
+  symbol:   method getBalance()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[155,26] cannot find symbol
+  symbol:   method getStatus()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[156,29] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[24,39] cannot find symbol
+  symbol:   method getEmail()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[29,29] cannot find symbol
+  symbol:   method getFullName()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[30,26] cannot find symbol
+  symbol:   method getEmail()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[31,26] cannot find symbol
+  symbol:   method getPhone()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[32,29] cannot find symbol
+  symbol:   method getPassword()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[33,25] cannot find symbol
+  symbol:   method getRole()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[34,27] cannot find symbol
+  symbol:   method getStatus()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[34,53] cannot find symbol
+  symbol:   method getStatus()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[35,31] cannot find symbol
+  symbol:   method isMfaEnabled()
+  location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[49,16] cannot find symbol
+  symbol:   method getFullName()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[50,33] cannot find symbol
+  symbol:   method getFullName()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[52,16] cannot find symbol
+  symbol:   method getPhone()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[53,30] cannot find symbol
+  symbol:   method getPhone()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[55,16] cannot find symbol
+  symbol:   method getStatus()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[56,31] cannot find symbol
+  symbol:   method getStatus()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[58,16] cannot find symbol
+  symbol:   method getMfaEnabled()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[59,35] cannot find symbol
+  symbol:   method getMfaEnabled()
+  location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[87,12] cannot find symbol
+  symbol:   method setUserId(java.lang.Long)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[88,12] cannot find symbol
+  symbol:   method setFullName(java.lang.String)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[89,12] cannot find symbol
+  symbol:   method setEmail(java.lang.String)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[90,12] cannot find symbol
+  symbol:   method setPhone(java.lang.String)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[91,12] cannot find symbol
+  symbol:   method setRole(com.bank.modernize.enums.Role)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[92,12] cannot find symbol
+  symbol:   method setStatus(com.bank.modernize.enums.Status)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[93,12] cannot find symbol
+  symbol:   method setMfaEnabled(boolean)
+  location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AdminDashboardService.java:[36,22] invalid method reference
+  cannot find symbol
+    symbol:   method getAmount()
+    location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AdminDashboardService.java:[41,16] constructor DashboardStatsResponse in class com.bank.modernize.dto.DashboardStatsResponse cannot be applied to given types;
+  required: no arguments
+  found:    long,long,java.math.BigDecimal,long
+  reason: actual and formal argument lists differ in length
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.924 s
+[INFO] Finished at: 2026-02-11T13:30:44+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project modernize: Compilation failure: Compilation failure: 
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/controller/TransactionController.java:[22,42] variable transactionService not initialized in the default constructor
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[34,31] cannot find symbol
+[ERROR]   symbol:   method getAccountId()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[44,27] cannot find symbol
+[ERROR]   symbol:   method getTxnId()
+[ERROR]   location: variable t of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[49,49] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable b of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[49,76] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable a of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[57,40] cannot find symbol
+[ERROR]   symbol:   method getFromAccount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[58,36] cannot find symbol
+[ERROR]   symbol:   method getFromAccount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[60,36] cannot find symbol
+[ERROR]   symbol:   method getToAccount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[64,24] cannot find symbol
+[ERROR]   symbol:   method getTxnId()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[65,24] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[66,24] cannot find symbol
+[ERROR]   symbol:   method getTxnType()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[68,24] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[69,24] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[87,28] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[86,28] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[85,28] cannot find symbol
+[ERROR]   symbol:   method getFromAccount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[84,28] cannot find symbol
+[ERROR]   symbol:   method getTxnType()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[83,28] cannot find symbol
+[ERROR]   symbol:   method getFromAccount()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[82,28] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[81,28] cannot find symbol
+[ERROR]   symbol:   method getTxnId()
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/TransactionService.java:[89,24] incompatible types: java.util.List<java.lang.Object> cannot be converted to java.util.List<com.bank.modernize.dto.TransactionHistoryResponse>
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[36,33] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[40,29] cannot find symbol
+[ERROR]   symbol:   method getFullName()
+[ERROR]   location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[41,26] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[42,26] cannot find symbol
+[ERROR]   symbol:   method getPhone()
+[ERROR]   location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[43,44] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable req of type com.bank.modernize.dto.RegisterRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[74,41] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable req of type com.bank.modernize.dto.OtpRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AuthService.java:[80,33] cannot find symbol
+[ERROR]   symbol:   method getOtp()
+[ERROR]   location: variable req of type com.bank.modernize.dto.OtpRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[27,51] cannot find symbol
+[ERROR]   symbol:   method getAccountNumber()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[30,38] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[33,47] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[41,24] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[42,24] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[45,16] cannot find symbol
+[ERROR]   symbol:   method setBalance(java.math.BigDecimal)
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[48,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[51,71] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[54,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[64,51] cannot find symbol
+[ERROR]   symbol:   method getAccountNumber()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[67,38] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[70,47] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[78,24] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[79,24] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransactionRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[82,16] cannot find symbol
+[ERROR]   symbol:   method setBalance(java.math.BigDecimal)
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[85,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[88,74] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[91,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[101,52] cannot find symbol
+[ERROR]   symbol:   method getFromAccountNumber()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[104,50] cannot find symbol
+[ERROR]   symbol:   method getToAccountNumber()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[107,38] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[111,47] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[119,25] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable from of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[120,23] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable to of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[121,24] cannot find symbol
+[ERROR]   symbol:   method getAmount()
+[ERROR]   location: variable req of type com.bank.modernize.dto.TransferRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[124,17] cannot find symbol
+[ERROR]   symbol:   method setBalance(java.math.BigDecimal)
+[ERROR]   location: variable from of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[125,15] cannot find symbol
+[ERROR]   symbol:   method setBalance(java.math.BigDecimal)
+[ERROR]   location: variable to of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[130,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[136,16] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.TxnStatus)
+[ERROR]   location: variable txn of type com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/BankingService.java:[153,35] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/adapter/CobolAdapter.java:[44,13] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.bank.modernize.adapter.CobolAdapter
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/adapter/CobolAdapter.java:[53,13] cannot find symbol
+[ERROR]   symbol:   variable log
+[ERROR]   location: class com.bank.modernize.adapter.CobolAdapter
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[51,20] cannot find symbol
+[ERROR]   symbol:   method getAccountType()
+[ERROR]   location: variable request of type com.bank.modernize.dto.CreateAccountRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[57,37] cannot find symbol
+[ERROR]   symbol:   method getInitialDeposit()
+[ERROR]   location: variable request of type com.bank.modernize.dto.CreateAccountRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[67,12] cannot find symbol
+[ERROR]   symbol:   method setCustomer(com.bank.modernize.entity.User)
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[68,12] cannot find symbol
+[ERROR]   symbol:   method setAccountNumber(java.lang.Long)
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[69,35] cannot find symbol
+[ERROR]   symbol:   method getAccountType()
+[ERROR]   location: variable request of type com.bank.modernize.dto.CreateAccountRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[70,12] cannot find symbol
+[ERROR]   symbol:   method setBalance(java.math.BigDecimal)
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[71,12] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.AccountStatus)
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[150,29] cannot find symbol
+[ERROR]   symbol:   method getAccountId()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[151,30] cannot find symbol
+[ERROR]   symbol:   method getCustomer()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[152,33] cannot find symbol
+[ERROR]   symbol:   method getAccountNumber()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[153,31] cannot find symbol
+[ERROR]   symbol:   method getAccountType()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[154,27] cannot find symbol
+[ERROR]   symbol:   method getBalance()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[155,26] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AccountService.java:[156,29] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable acc of type com.bank.modernize.entity.Account
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[24,39] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[29,29] cannot find symbol
+[ERROR]   symbol:   method getFullName()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[30,26] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[31,26] cannot find symbol
+[ERROR]   symbol:   method getPhone()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[32,29] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[33,25] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[34,27] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[34,53] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[35,31] cannot find symbol
+[ERROR]   symbol:   method isMfaEnabled()
+[ERROR]   location: variable req of type com.bank.modernize.dto.CreateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[49,16] cannot find symbol
+[ERROR]   symbol:   method getFullName()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[50,33] cannot find symbol
+[ERROR]   symbol:   method getFullName()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[52,16] cannot find symbol
+[ERROR]   symbol:   method getPhone()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[53,30] cannot find symbol
+[ERROR]   symbol:   method getPhone()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[55,16] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[56,31] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[58,16] cannot find symbol
+[ERROR]   symbol:   method getMfaEnabled()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[59,35] cannot find symbol
+[ERROR]   symbol:   method getMfaEnabled()
+[ERROR]   location: variable req of type com.bank.modernize.dto.UpdateUserRequest
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[87,12] cannot find symbol
+[ERROR]   symbol:   method setUserId(java.lang.Long)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[88,12] cannot find symbol
+[ERROR]   symbol:   method setFullName(java.lang.String)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[89,12] cannot find symbol
+[ERROR]   symbol:   method setEmail(java.lang.String)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[90,12] cannot find symbol
+[ERROR]   symbol:   method setPhone(java.lang.String)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[91,12] cannot find symbol
+[ERROR]   symbol:   method setRole(com.bank.modernize.enums.Role)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[92,12] cannot find symbol
+[ERROR]   symbol:   method setStatus(com.bank.modernize.enums.Status)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/UserService.java:[93,12] cannot find symbol
+[ERROR]   symbol:   method setMfaEnabled(boolean)
+[ERROR]   location: variable res of type com.bank.modernize.dto.UserResponse
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AdminDashboardService.java:[36,22] invalid method reference
+[ERROR]   cannot find symbol
+[ERROR]     symbol:   method getAmount()
+[ERROR]     location: class com.bank.modernize.entity.Transaction
+[ERROR] /D:/UI_Design/CBB_project/CBB_Backend-main/src/main/java/com/bank/modernize/service/AdminDashboardService.java:[41,16] constructor DashboardStatsResponse in class com.bank.modernize.dto.DashboardStatsResponse cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    long,long,java.math.BigDecimal,long
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

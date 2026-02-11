@@ -1,0 +1,25 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< com.bank:modernize >-------------------------
+[INFO] Building CBB-BACKEND 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ modernize ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ modernize ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ modernize ---
+[INFO] skip non existing resourceDirectory D:\UI_Design\CBB_project\CBB_Backend-main\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ modernize ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.155 s
+[INFO] Finished at: 2026-02-11T13:45:29+05:30
+[INFO] ------------------------------------------------------------------------
