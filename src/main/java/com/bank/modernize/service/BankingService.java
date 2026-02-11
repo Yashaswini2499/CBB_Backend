@@ -19,6 +19,8 @@ public class BankingService {
     private final AccountRepository repo;
     private final CobolAdapter cobol;
     private final TxnLogService txnLogService;
+    private final UserRepository userRepo;
+
 
 
     @Transactional
@@ -137,6 +139,15 @@ public class BankingService {
             txnLogService.save(txn);
             throw e;
         }
+    }
+    
+    @Transactional
+    public ApiResponse getCustomerTotalBalanceByEmail(String email) {
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return getCustomerTotalBalance(user.getUserId());
     }
     
     @Transactional

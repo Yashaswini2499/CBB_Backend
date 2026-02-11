@@ -106,4 +106,7 @@ INSERT INTO audit_logs (user_id,action) VALUES
 (3,'Applied for loan'),
 (1,'Updated profile');
 
+ALTER TABLE loans ADD COLUMN tenure_months INT NOT NULL DEFAULT 12;
+ALTER TABLE loans ADD COLUMN annual_interest_rate DECIMAL(5,2);
+ALTER TABLE loans MODIFY emi DECIMAL(12,2) NULL;
 

@@ -37,8 +37,12 @@ public class BankingController {
         return service.transfer(req);
     }
     
-    @GetMapping("/customer/{userId}/total-balance")
-    public ResponseEntity<ApiResponse> total(@PathVariable Long userId) {
-        return ResponseEntity.ok(service.getCustomerTotalBalance(userId));
+    @GetMapping("/my-total-balance")
+    public ResponseEntity<ApiResponse> total(
+            org.springframework.security.core.Authentication auth) {
+
+        String email = auth.getName();
+        return ResponseEntity.ok(service.getCustomerTotalBalanceByEmail(email));
     }
+
 }

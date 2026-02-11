@@ -21,13 +21,17 @@ public class TransactionController {
 	
 	private final TransactionService transactionService;
 	
-	@GetMapping("/customer/{userId}")
-	public List<TransactionResponse> history(@PathVariable Long userId) {
-	    return transactionService.getCustomerTransactions(userId);
+	@GetMapping("/my-transactions")
+	public List<TransactionResponse> myHistory(
+	        org.springframework.security.core.Authentication auth) {
+
+	    String email = auth.getName(); 
+	    return transactionService.getCustomerTransactionsByEmail(email);
 	}
+
 	
     @GetMapping("/history")
-    public ResponseEntity<List<TransactionHistoryResponse>> getHistory() {
+    public ResponseEntity<List<TransactionHistoryResponse>> getallHistory() {
         return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 

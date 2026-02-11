@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.bank.modernize.dto.ApplyLoanRequest;
+import com.bank.modernize.dto.LoanRequest;
 import com.bank.modernize.dto.LoanResponse;
 import com.bank.modernize.service.LoanService;
 
@@ -20,8 +20,8 @@ public class LoanController {
     private final LoanService loanService;
 
     // 1. Apply loan
-    @PostMapping
-    public ResponseEntity<LoanResponse> applyLoan(@RequestBody ApplyLoanRequest request) {
+    @PostMapping("/apply")
+    public ResponseEntity<LoanResponse> applyLoan(@RequestBody LoanRequest request){
         return new ResponseEntity<>(loanService.applyLoan(request), HttpStatus.CREATED);
     }
 

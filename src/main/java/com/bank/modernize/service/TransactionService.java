@@ -12,8 +12,10 @@ import com.bank.modernize.dto.TransactionHistoryResponse;
 import com.bank.modernize.dto.TransactionResponse;
 import com.bank.modernize.entity.Account;
 import com.bank.modernize.entity.Transaction;
+import com.bank.modernize.entity.User;
 import com.bank.modernize.repository.AccountRepository;
 import com.bank.modernize.repository.TransactionRepository;
+import com.bank.modernize.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +25,18 @@ public class TransactionService {
 
     private final AccountRepository accountRepo;
     private final TransactionRepository transactionRepo;
+    private final UserRepository userRepo;
+
+    
+    public List<TransactionResponse> getCustomerTransactionsByEmail(String email) {
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return getCustomerTransactions(user.getUserId());
+    }
+
+
 
     public List<TransactionResponse> getCustomerTransactions(Long userId) {
 

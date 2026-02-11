@@ -9,6 +9,6 @@ import com.bank.modernize.enums.LoanStatus;
 
 public interface LoanRepository extends JpaRepository<Loan, Long> {
 
-    List<Loan> findByCustomerId(Long customerId);
+	List<Loan> findByCustomerUserId(Long userId);
     long countByStatus(LoanStatus status);
 }

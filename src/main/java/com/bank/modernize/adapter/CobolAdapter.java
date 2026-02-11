@@ -109,7 +109,33 @@ public class CobolAdapter {
         return parseAmount(res);
     }
 
+    public double calculateInterestRate(int creditScore) {
+        String res = runProcess("InterestRate.exe", String.valueOf(creditScore));
 
+        if ("REJECT".equalsIgnoreCase(res))
+            throw new RuntimeException("Loan rejected: low credit score");
+
+        try {
+            return Double.parseDouble(res.trim());
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid rate from COBOL: " + res);
+        }
+    }
+
+
+    public double calculateEmi(double loanAmount, double annualRate, int months) {
+
+        // COBOL expects amount in paise
+        String res = runProcess("EmiCalc.exe",
+                scale(loanAmount),              
+                String.valueOf(annualRate),    
+                String.valueOf(months));      
+
+        if ("INVALID".equalsIgnoreCase(res))
+            throw new RuntimeException("Invalid EMI calculation input");
+
+        return parseAmount(res); // paise → rupees
+    }
 
     
     private void handleCommonErrors(String res) {
@@ -128,4 +154,5 @@ public class CobolAdapter {
             throw new RuntimeException("Invalid numeric response from COBOL: " + val);
         }
     }
+   
 }
