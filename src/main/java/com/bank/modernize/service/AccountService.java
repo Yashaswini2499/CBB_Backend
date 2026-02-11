@@ -20,30 +20,16 @@ import com.bank.modernize.repository.AccountRepository;
 import com.bank.modernize.repository.TransactionRepository;
 import com.bank.modernize.repository.UserRepository;
 
-<<<<<<< HEAD
-@Service
-=======
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
->>>>>>> origin/main
 public class AccountService {
 
     private final AccountRepository accountRepo;
     private final UserRepository userRepo;
     private final TransactionRepository transactionRepo;
 
-<<<<<<< HEAD
-    public AccountService(AccountRepository accountRepo, UserRepository userRepo,
-            TransactionRepository transactionRepo) {
-        this.accountRepo = accountRepo;
-        this.userRepo = userRepo;
-        this.transactionRepo = transactionRepo;
-    }
-
-=======
->>>>>>> origin/main
     // =========================
     // CREATE ACCOUNT FOR LOGGED-IN USER
     // =========================
@@ -51,16 +37,10 @@ public class AccountService {
     public AccountResponse createAccountForLoggedInUser(CreateAccountRequest request, String email) {
 
         User customer = userRepo.findByEmail(email)
-<<<<<<< HEAD
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "User not found"));
-=======
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
                                 "User not found"));
->>>>>>> origin/main
 
         if (customer.getStatus() != Status.ACTIVE) {
             throw new ResponseStatusException(
@@ -102,16 +82,10 @@ public class AccountService {
     public AccountResponse getAccountById(Long accountId) {
 
         Account acc = accountRepo.findById(accountId)
-<<<<<<< HEAD
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Account not found"));
-=======
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
                                 "Account not found"));
->>>>>>> origin/main
 
         return mapToResponse(acc);
     }
@@ -141,13 +115,6 @@ public class AccountService {
     public void deleteAccountById(Long accountId) {
 
         Account account = accountRepo.findById(accountId)
-<<<<<<< HEAD
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Account not found"));
-
-        boolean hasTxn = transactionRepo.existsByFromAccount_AccountId(accountId);
-=======
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
@@ -155,7 +122,6 @@ public class AccountService {
 
         boolean hasTxn =
                 transactionRepo.existsByFromAccount_AccountId(accountId);
->>>>>>> origin/main
 
         if (hasTxn) {
             throw new ResponseStatusException(
@@ -207,16 +173,10 @@ public class AccountService {
     public List<AccountResponse> getAccountsByEmail(String email) {
 
         User user = userRepo.findByEmail(email)
-<<<<<<< HEAD
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "User not found"));
-=======
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
                                 "User not found"));
->>>>>>> origin/main
 
         return accountRepo.findByCustomerUserId(user.getUserId())
                 .stream()

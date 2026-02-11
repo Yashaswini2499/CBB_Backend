@@ -1,25 +1,5 @@
 package com.bank.modernize.service;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-
-@Service
-public class EmailService {
-
-    // 🔴 TEMPORARY: Disable real email sending
-    // Just print OTP in console
-
-    public void sendOtp(String email, String otp) {
-        System.out.println("=================================");
-        System.out.println(" OTP for " + email + " = " + otp);
-        System.out.println("=================================");
-    }
-
-    public void sendResetToken(String email, String token) {
-        System.out.println("=================================");
-        System.out.println(" RESET TOKEN for " + email + " = " + token);
-        System.out.println("=================================");
-=======
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -72,6 +52,5 @@ public class EmailService {
         } catch (MailException ex) {
             System.out.println("Email sending failed. Using console reset link only.");
         }
->>>>>>> origin/main
     }
 }
