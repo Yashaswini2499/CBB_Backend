@@ -89,7 +89,7 @@ public class LoanService {
 
     // Get all loans of customer
     public List<LoanResponse> getLoansByCustomer(Long customerId) {
-        return loanRepository.findByCustomerUserId(customerId) 
+        return loanRepository.findByCustomer_UserId(customerId) 
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -103,6 +103,14 @@ public class LoanService {
     private Loan getLoanEntity(Long loanId) {
         return loanRepository.findById(loanId)
                 .orElseThrow(() -> new RuntimeException("Loan not found: " + loanId));
+    }
+    
+ // ================= ADMIN → GET PENDING LOANS =================
+    public List<LoanResponse> getPendingLoans() {
+        return loanRepository.findByStatus(LoanStatus.PENDING)
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     private LoanResponse mapToResponse(Loan loan) {

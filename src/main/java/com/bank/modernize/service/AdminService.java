@@ -23,6 +23,11 @@ public class AdminService {
     public long getPendingLoans() {
         return loanRepository.countByStatus(LoanStatus.PENDING);
     }
+    
+ // ================= LOAN STATUS COUNT (FOR CHART) =================
+    public long countLoansByStatus(LoanStatus status) {
+        return loanRepository.countByStatus(status);
+    }
 
     // ================= DELETE USER =================
     public void deleteUser(Long userId) {

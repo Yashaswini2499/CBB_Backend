@@ -57,6 +57,14 @@ public class LoanController {
     }
     
 
+ // ================= ADMIN → GET ALL PENDING LOANS =================
+    @GetMapping("/admin/pending")
+    public ResponseEntity<List<LoanResponse>> getPendingLoans() {
+        return ResponseEntity.ok(loanService.getPendingLoans());
+    }
+
+
+
     // 5. Get loan by ID
     @GetMapping("/{loanId}")
     public ResponseEntity<LoanResponse> getLoanById(@PathVariable Long loanId) {

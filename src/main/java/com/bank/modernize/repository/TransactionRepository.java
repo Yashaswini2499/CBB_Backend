@@ -35,4 +35,12 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     // ================= TODAY TRANSACTIONS =================
     @Query("SELECT COUNT(t) FROM Transaction t WHERE DATE(t.createdAt) = CURRENT_DATE")
     long countTodayTransactions();
+    
+ // ================= MONTHLY TRANSACTIONS (FOR BAR CHART) =================
+    @Query(value = """
+        SELECT COUNT(*) FROM transactions
+        WHERE MONTH(created_at) = MONTH(CURRENT_DATE())
+        GROUP BY DAY(created_at)
+    """, nativeQuery = true)
+    List<Long> getMonthlyTransactionCounts();
 }

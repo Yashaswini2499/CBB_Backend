@@ -4,7 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 import com.bank.modernize.entity.Transaction;
+
+import java.util.Map;
+import java.util.HashMap;
+import com.bank.modernize.enums.LoanStatus;
+
+
 import com.bank.modernize.entity.User;
 import com.bank.modernize.service.AdminService;
 import com.bank.modernize.repository.TransactionRepository;
@@ -48,6 +55,8 @@ public class AdminController {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+    
+    
 
     // ================= DELETE USER =================
     @DeleteMapping("/delete-user/{id}")
@@ -61,4 +70,28 @@ public class AdminController {
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAllByOrderByCreatedAtDesc();
     }
+
+    
+ // ================= LOAN STATUS STATS (PIE CHART) =================
+    @GetMapping("/loan-status-stats")
+    public Map<String, Long> getLoanStatusStats() {
+
+        Map<String, Long> stats = new HashMap<>();
+
+        stats.put("APPROVED", service.countLoansByStatus(LoanStatus.APPROVED));
+        stats.put("PENDING", service.countLoansByStatus(LoanStatus.PENDING));
+        stats.put("REJECTED", service.countLoansByStatus(LoanStatus.REJECTED));
+
+        return stats;
+    }
+
+
+    // ================= MONTHLY TRANSACTIONS (BAR CHART) =================
+    @GetMapping("/monthly-transactions")
+    public List<Long> getMonthlyTransactions() {
+        return transactionRepository.getMonthlyTransactionCounts();
+    }
+    
+    
+
 }
