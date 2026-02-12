@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import com.bank.modernize.entity.Transaction;
 import com.bank.modernize.entity.User;
 import com.bank.modernize.service.AdminService;
 import com.bank.modernize.repository.TransactionRepository;
@@ -54,5 +54,11 @@ public class AdminController {
     public String deleteUser(@PathVariable Long id) {
         service.deleteUser(id);
         return "User deleted successfully";
+    }
+
+        // ================= GET ALL TRANSACTIONS =================
+    @GetMapping("/all-transactions")
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.findAllByOrderByCreatedAtDesc();
     }
 }
