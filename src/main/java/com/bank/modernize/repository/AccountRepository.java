@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.bank.modernize.entity.Account;
+import com.bank.modernize.entity.User;
 
 
 @Repository
@@ -21,6 +22,9 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     void deleteByCustomerUserId(Long userId);
 
 	boolean existsById(Long accountId);
+	
+	Optional<Account> findByCustomer(User customer);
+
 	
 	Optional<Account> findByAccountNumber(Long accountNumber);
 

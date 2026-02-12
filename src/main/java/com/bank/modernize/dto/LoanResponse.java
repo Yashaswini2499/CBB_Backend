@@ -21,4 +21,12 @@ public class LoanResponse {
     private BigDecimal annualInterestRate; 
     private LoanStatus status;
     private LocalDateTime createdAt;
+    private BigDecimal totalInterest;
+    private BigDecimal totalRepayment;
+    private BigDecimal totalPaid;
+    private BigDecimal remainingBalance;
+    private Integer remainingMonths;
+
 }
+
+

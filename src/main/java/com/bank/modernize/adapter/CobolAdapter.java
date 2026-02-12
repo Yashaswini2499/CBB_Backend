@@ -3,6 +3,8 @@ package com.bank.modernize.adapter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import com.bank.modernize.dto.EmiResult;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -112,9 +114,6 @@ public class CobolAdapter {
     public double calculateInterestRate(int creditScore) {
         String res = runProcess("InterestRate.exe", String.valueOf(creditScore));
 
-        if ("REJECT".equalsIgnoreCase(res))
-            throw new RuntimeException("Loan rejected: low credit score");
-
         try {
             return Double.parseDouble(res.trim());
         } catch (Exception e) {
@@ -122,19 +121,26 @@ public class CobolAdapter {
         }
     }
 
+    public EmiResult calculateEmi(double loanAmount, double annualRate, int months) {
 
-    public double calculateEmi(double loanAmount, double annualRate, int months) {
-
-        // COBOL expects amount in paise
         String res = runProcess("EmiCalc.exe",
-                scale(loanAmount),              
-                String.valueOf(annualRate),    
-                String.valueOf(months));      
+                scale(loanAmount),
+                String.valueOf(annualRate),
+                String.valueOf(months));
 
         if ("INVALID".equalsIgnoreCase(res))
             throw new RuntimeException("Invalid EMI calculation input");
 
-        return parseAmount(res); // paise → rupees
+        String[] parts = res.trim().split("\\s+");
+
+        if (parts.length != 3)
+            throw new RuntimeException("Invalid EMI response from COBOL: " + res);
+
+        double emi = parseAmount(parts[0]);
+        double totalPayment = parseAmount(parts[1]);
+        double totalInterest = parseAmount(parts[2]);
+
+        return new EmiResult(emi, totalPayment, totalInterest);
     }
 
     

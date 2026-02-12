@@ -4,21 +4,24 @@
        DATA DIVISION.
        WORKING-STORAGE SECTION.
 
-       01 WS-CMD        PIC X(100).
-       01 WS-P-TXT      PIC X(15).
-       01 WS-R-TXT      PIC X(10).
-       01 WS-N-TXT      PIC X(10).
+       01 WS-CMD              PIC X(100).
+       01 WS-P-TXT            PIC X(15).
+       01 WS-R-TXT            PIC X(10).
+       01 WS-N-TXT            PIC X(10).
 
-       01 WS-P-D        COMP-2.
-       01 WS-RATE-D     COMP-2.
-       01 WS-N-D        COMP-2.
+       01 WS-P-D              COMP-2.
+       01 WS-RATE-D           COMP-2.
+       01 WS-N-D              COMP-2.
 
-       01 WS-R          COMP-2.
-       01 WS-ONEPLUS    COMP-2.
-       01 WS-POWER      COMP-2.
-       01 WS-EMI        COMP-2.
+       01 WS-R                COMP-2.
+       01 WS-ONEPLUS          COMP-2.
+       01 WS-POWER            COMP-2.
+       01 WS-EMI              COMP-2.
 
-       01 WS-INVALID    PIC X VALUE 'N'.
+       01 WS-TOTAL-PAYMENT    COMP-2.
+       01 WS-TOTAL-INTEREST   COMP-2.
+
+       01 WS-INVALID          PIC X VALUE 'N'.
 
        PROCEDURE DIVISION.
 
@@ -58,8 +61,15 @@
            IF WS-INVALID = 'Y'
                DISPLAY "INVALID"
            ELSE
-               DISPLAY FUNCTION INTEGER(WS-EMI)
+               COMPUTE WS-TOTAL-PAYMENT = WS-EMI * WS-N-D
+               COMPUTE WS-TOTAL-INTEREST = WS-TOTAL-PAYMENT - WS-P-D
+
+               DISPLAY
+                   FUNCTION INTEGER(WS-EMI + 0.5) SPACE
+                   FUNCTION INTEGER(WS-TOTAL-PAYMENT + 0.5) SPACE
+                   FUNCTION INTEGER(WS-TOTAL-INTEREST + 0.5)
            END-IF
 
            STOP RUN.
+
 

@@ -8,16 +8,18 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.bank.modernize.adapter.CobolAdapter;
+import com.bank.modernize.dto.EmiResult;
 import com.bank.modernize.dto.LoanRequest;
 import com.bank.modernize.dto.LoanResponse;
 import com.bank.modernize.entity.Loan;
 import com.bank.modernize.entity.User;
 import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.enums.LoanType;
+import com.bank.modernize.repository.EmiPaymentRepository;
 import com.bank.modernize.repository.LoanRepository;
 import com.bank.modernize.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,10 @@ public class LoanService {
     private final LoanRepository loanRepository;
     private final UserRepository userRepo;
     private final CobolAdapter cobol;
+
+    private final EmiPaymentService emiPaymentService;
+    private final EmiPaymentRepository emiPaymentRepository;
+
 
     @Transactional
     public LoanResponse applyLoan(LoanRequest dto) {
@@ -43,11 +49,13 @@ public class LoanService {
 
         double rate = cobol.calculateInterestRate(dto.getCreditScore());
 
-        double emi = cobol.calculateEmi(
+        EmiResult emiResult = cobol.calculateEmi(
                 dto.getLoanAmount().doubleValue(),
                 rate,
                 dto.getTenureMonths()
         );
+
+
 
         Loan loan = Loan.builder()
                 .customer(user)
@@ -57,7 +65,7 @@ public class LoanService {
                 .loanType(LoanType.valueOf(dto.getLoanType()))
                 .tenureMonths(dto.getTenureMonths())
                 .annualInterestRate(BigDecimal.valueOf(rate))
-                .emi(BigDecimal.valueOf(emi))
+                .emi(BigDecimal.valueOf(emiResult.getEmi()))
                 .status(LoanStatus.PENDING) 
                 .build();
 
@@ -98,7 +106,9 @@ public class LoanService {
     }
 
     private LoanResponse mapToResponse(Loan loan) {
+
         LoanResponse res = new LoanResponse();
+
         res.setLoanId(loan.getLoanId());
         res.setCustomerId(loan.getCustomer().getUserId());
         res.setSalary(loan.getSalary());
@@ -107,9 +117,28 @@ public class LoanService {
         res.setLoanType(loan.getLoanType());
         res.setEmi(loan.getEmi());
         res.setAnnualInterestRate(loan.getAnnualInterestRate());
-        res.setTenureMonths(loan.getTenureMonths()); 
+        res.setTenureMonths(loan.getTenureMonths());
         res.setStatus(loan.getStatus());
         res.setCreatedAt(loan.getCreatedAt());
+
+        BigDecimal totalRepayment =
+                loan.getEmi().multiply(BigDecimal.valueOf(loan.getTenureMonths()));
+
+        BigDecimal totalInterest =
+                totalRepayment.subtract(loan.getLoanAmount());
+
+        BigDecimal totalPaid = emiPaymentService.getTotalPaid(loan);
+        BigDecimal remainingBalance = loan.getLoanAmount().subtract(totalPaid);
+
+        long paidCount = emiPaymentRepository.countByLoan(loan);
+        int remainingMonths = loan.getTenureMonths() - (int) paidCount;
+
+        res.setTotalPaid(totalPaid);
+        res.setTotalRepayment(totalRepayment);
+        res.setTotalInterest(totalInterest);
+        res.setRemainingBalance(remainingBalance);
+        res.setRemainingMonths(remainingMonths);
+
         return res;
     }
 

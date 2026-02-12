@@ -110,3 +110,18 @@ ALTER TABLE loans ADD COLUMN tenure_months INT NOT NULL DEFAULT 12;
 ALTER TABLE loans ADD COLUMN annual_interest_rate DECIMAL(5,2);
 ALTER TABLE loans MODIFY emi DECIMAL(12,2) NULL;
 
+CREATE TABLE emi_payment (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    loan_id BIGINT NOT NULL,
+
+    amount DECIMAL(15,2) NOT NULL,
+
+    paid_at DATETIME NOT NULL,
+
+    CONSTRAINT fk_emi_payment_loan
+        FOREIGN KEY (loan_id)
+        REFERENCES loan(loan_id)
+        ON DELETE CASCADE
+);
+

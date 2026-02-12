@@ -55,7 +55,7 @@ public class LoanController {
         return ResponseEntity.ok(
                 loanService.getLoansByCustomer(user.getUserId()));
     }
-
+    
 
     // 5. Get loan by ID
     @GetMapping("/{loanId}")
