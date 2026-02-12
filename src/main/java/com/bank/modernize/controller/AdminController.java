@@ -4,15 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import com.bank.modernize.entity.Transaction;
-
 import java.util.Map;
 import java.util.HashMap;
-import com.bank.modernize.enums.LoanStatus;
+import java.util.ArrayList;
 
-
+import com.bank.modernize.entity.Transaction;
 import com.bank.modernize.entity.User;
+import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.service.AdminService;
 import com.bank.modernize.repository.TransactionRepository;
 import com.bank.modernize.repository.UserRepository;
@@ -24,7 +22,7 @@ public class AdminController {
 
     private final AdminService service;
     private final TransactionRepository transactionRepository;
-    private final UserRepository userRepository;   // ⭐ NEW
+    private final UserRepository userRepository;
 
     // ================= TOTAL USERS =================
     @GetMapping("/total-users")
@@ -55,8 +53,6 @@ public class AdminController {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    
-    
 
     // ================= DELETE USER =================
     @DeleteMapping("/delete-user/{id}")
@@ -65,33 +61,39 @@ public class AdminController {
         return "User deleted successfully";
     }
 
-        // ================= GET ALL TRANSACTIONS =================
+    // ================= GET ALL TRANSACTIONS =================
     @GetMapping("/all-transactions")
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    
- // ================= LOAN STATUS STATS (PIE CHART) =================
+    // ================= LOAN STATUS STATS (PIE CHART) =================
     @GetMapping("/loan-status-stats")
     public Map<String, Long> getLoanStatusStats() {
 
         Map<String, Long> stats = new HashMap<>();
 
-        stats.put("APPROVED", service.countLoansByStatus(LoanStatus.APPROVED));
-        stats.put("PENDING", service.countLoansByStatus(LoanStatus.PENDING));
-        stats.put("REJECTED", service.countLoansByStatus(LoanStatus.REJECTED));
+        stats.put("Approved", service.countLoansByStatus(LoanStatus.APPROVED));
+        stats.put("Pending", service.countLoansByStatus(LoanStatus.PENDING));
+        stats.put("Rejected", service.countLoansByStatus(LoanStatus.REJECTED));
 
         return stats;
     }
 
-
     // ================= MONTHLY TRANSACTIONS (BAR CHART) =================
     @GetMapping("/monthly-transactions")
-    public List<Long> getMonthlyTransactions() {
-        return transactionRepository.getMonthlyTransactionCounts();
-    }
-    
-    
+    public List<Map<String, Object>> getMonthlyTransactions() {
 
+        List<Object[]> rows = transactionRepository.getMonthlyTransactionStats();
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (Object[] row : rows) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("day", "Day " + row[0]);
+            map.put("transactions", ((Number) row[1]).intValue());
+            result.add(map);
+        }
+
+        return result;
+    }
 }

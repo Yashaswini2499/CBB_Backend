@@ -38,9 +38,12 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     
  // ================= MONTHLY TRANSACTIONS (FOR BAR CHART) =================
     @Query(value = """
-        SELECT COUNT(*) FROM transactions
-        WHERE MONTH(created_at) = MONTH(CURRENT_DATE())
-        GROUP BY DAY(created_at)
-    """, nativeQuery = true)
-    List<Long> getMonthlyTransactionCounts();
+            SELECT DAY(created_at) AS day, COUNT(*) AS total
+            FROM transactions
+            WHERE MONTH(created_at) = MONTH(CURRENT_DATE())
+              AND YEAR(created_at) = YEAR(CURRENT_DATE())
+            GROUP BY DAY(created_at)
+            ORDER BY DAY(created_at)
+            """, nativeQuery = true)
+    List<Object[]> getMonthlyTransactionStats();
 }
