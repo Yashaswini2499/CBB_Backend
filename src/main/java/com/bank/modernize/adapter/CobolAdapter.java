@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 public class CobolAdapter {
 
-    private static final String PATH = "C:/Users/Sony/CBB_Backend/cobol/";
+    private static final String PATH = "C:/cobol/";
     private static final int TIMEOUT_MS = 5000;
 
     private String runProcess(String exe, String... params) {
