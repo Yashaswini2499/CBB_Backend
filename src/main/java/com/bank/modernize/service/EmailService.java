@@ -12,7 +12,6 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    // ================= SEND LOGIN OTP =================
     public void sendOtp(String email, String otp) {
 
         // Always print to console (for demo / fallback)
@@ -24,7 +23,7 @@ public class EmailService {
             message.setSubject("Your OTP Code");
             message.setText("Your OTP is: " + otp + "\nValid for 5 minutes.");
 
-            mailSender.send(message);   // Try sending mail
+            mailSender.send(message);  
             System.out.println("Email sent successfully to " + email);
 
         } catch (MailException ex) {
@@ -33,24 +32,4 @@ public class EmailService {
         }
     }
 
-    // ================= SEND RESET LINK =================
-    public void sendResetToken(String email, String token) {
-
-        System.out.println("Reset token for " + email + " is: " + token);
-
-        String link = "http://localhost:8080/reset?token=" + token;
-
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(email);
-            message.setSubject("Password Reset Request");
-            message.setText("Click the link to reset password:\n" + link);
-
-            mailSender.send(message);
-            System.out.println("Reset link email sent to " + email);
-
-        } catch (MailException ex) {
-            System.out.println("Email sending failed. Using console reset link only.");
-        }
-    }
 }

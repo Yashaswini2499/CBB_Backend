@@ -56,7 +56,6 @@ public class LoanService {
         );
 
 
-
         Loan loan = Loan.builder()
                 .customer(user)
                 .salary(dto.getSalary())
@@ -132,11 +131,13 @@ public class LoanService {
         BigDecimal totalRepayment =
                 loan.getEmi().multiply(BigDecimal.valueOf(loan.getTenureMonths()));
 
+        BigDecimal totalPaid = emiPaymentService.getTotalPaid(loan);
+        
+        BigDecimal remainingBalance =
+                totalRepayment.subtract(totalPaid);
+
         BigDecimal totalInterest =
                 totalRepayment.subtract(loan.getLoanAmount());
-
-        BigDecimal totalPaid = emiPaymentService.getTotalPaid(loan);
-        BigDecimal remainingBalance = loan.getLoanAmount().subtract(totalPaid);
 
         long paidCount = emiPaymentRepository.countByLoan(loan);
         int remainingMonths = loan.getTenureMonths() - (int) paidCount;
