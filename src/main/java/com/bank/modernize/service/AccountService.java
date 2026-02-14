@@ -141,7 +141,7 @@ public class AccountService {
                     "Customer not found");
         }
 
-        accountRepo.deleteByCustomerUserId(customerId);
+        accountRepo.deleteByCustomerId(customerId);
     }
 
     private AccountResponse mapToResponse(Account acc) {

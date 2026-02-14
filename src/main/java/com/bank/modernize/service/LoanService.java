@@ -88,7 +88,7 @@ public class LoanService {
 
     // Get all loans of customer
     public List<LoanResponse> getLoansByCustomer(Long customerId) {
-        return loanRepository.findByCustomer_UserId(customerId) 
+        return loanRepository.findByCustomerUserId(customerId) 
                 .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());

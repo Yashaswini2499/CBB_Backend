@@ -2,6 +2,7 @@ package com.bank.modernize.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import com.bank.modernize.entity.Transaction;
 import com.bank.modernize.entity.User;
 import com.bank.modernize.enums.LoanStatus;
+import com.bank.modernize.enums.Role;
 import com.bank.modernize.service.AdminService;
 import com.bank.modernize.repository.TransactionRepository;
 import com.bank.modernize.repository.UserRepository;
@@ -48,17 +50,17 @@ public class AdminController {
         return transactionRepository.countTodayTransactions();
     }
 
-    // ================= GET ALL USERS =================
+    // ================= GET ONLY CUSTOMER USERS (NO ADMIN) =================
     @GetMapping("/all-users")
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userRepository.findByRoleNot(Role.ADMIN);   // ✅ FIXED
     }
 
     // ================= DELETE USER =================
-    @DeleteMapping("/delete-user/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        service.deleteUser(id);
-        return "User deleted successfully";
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        String msg = service.deleteUser(id);
+        return ResponseEntity.ok(msg);
     }
 
     // ================= GET ALL TRANSACTIONS =================
@@ -67,7 +69,7 @@ public class AdminController {
         return transactionRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    // ================= LOAN STATUS STATS (PIE CHART) =================
+    // ================= LOAN STATUS STATS =================
     @GetMapping("/loan-status-stats")
     public Map<String, Long> getLoanStatusStats() {
 
@@ -80,7 +82,7 @@ public class AdminController {
         return stats;
     }
 
-    // ================= MONTHLY TRANSACTIONS (BAR CHART) =================
+    // ================= MONTHLY TRANSACTIONS =================
     @GetMapping("/monthly-transactions")
     public List<Map<String, Object>> getMonthlyTransactions() {
 

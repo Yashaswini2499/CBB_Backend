@@ -10,9 +10,13 @@ import com.bank.modernize.entity.Transaction;
 import com.bank.modernize.enums.TxnStatus;
 import com.bank.modernize.enums.TxnType;
 
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.query.Param;
+
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
+    // ================= FIND METHODS =================
     List<Transaction> findByFromAccount_AccountIdIn(List<Long> ids);
 
     List<Transaction> findByToAccount_AccountIdIn(List<Long> ids);
@@ -28,15 +32,22 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findAllByOrderByCreatedAtDesc();
 
     // ================= TOTAL REVENUE =================
-    @Query("SELECT COALESCE(SUM(t.amount),0) FROM Transaction t " +
-           "WHERE t.txnType = com.bank.modernize.enums.TxnType.DEPOSIT")
+    @Query("""
+           SELECT COALESCE(SUM(t.amount),0)
+           FROM Transaction t
+           WHERE t.txnType = com.bank.modernize.enums.TxnType.DEPOSIT
+           """)
     Double getTotalRevenue();
 
     // ================= TODAY TRANSACTIONS =================
-    @Query("SELECT COUNT(t) FROM Transaction t WHERE DATE(t.createdAt) = CURRENT_DATE")
+    @Query("""
+           SELECT COUNT(t)
+           FROM Transaction t
+           WHERE DATE(t.createdAt) = CURRENT_DATE
+           """)
     long countTodayTransactions();
-    
- // ================= MONTHLY TRANSACTIONS (FOR BAR CHART) =================
+
+    // ================= MONTHLY TRANSACTIONS (BAR CHART) =================
     @Query(value = """
             SELECT DAY(created_at) AS day, COUNT(*) AS total
             FROM transactions
@@ -46,4 +57,17 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             ORDER BY DAY(created_at)
             """, nativeQuery = true)
     List<Object[]> getMonthlyTransactionStats();
+
+    // ================= DELETE ALL USER TRANSACTIONS =================
+    @Modifying
+    @Query(value = """
+    DELETE FROM transactions
+    WHERE from_acc_id IN (
+        SELECT account_id FROM accounts WHERE customer_id = :userId
+    )
+    OR to_acc_id IN (
+        SELECT account_id FROM accounts WHERE customer_id = :userId
+    )
+    """, nativeQuery = true)
+    void deleteByUserId(Long userId);
 }
