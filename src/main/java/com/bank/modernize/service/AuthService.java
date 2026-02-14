@@ -38,6 +38,7 @@ public class AuthService {
         User user = new User();
         user.setFullName(req.getFullName());
         user.setEmail(email);
+        user.setPhone(req.getPhone());
         user.setPassword(encoder.encode(req.getPassword()));
 
         if (domain.equals("gmail.com")) {
@@ -64,6 +65,12 @@ public class AuthService {
 
         if (!encoder.matches(req.getPassword(), user.getPassword()))
             throw new RuntimeException("INVALID_PASSWORD");
+
+        // Restrict Admin Login to bank.com only
+        if (user.getRole() == Role.ADMIN &&
+            !user.getEmail().endsWith("@bank.com")) {
+            throw new RuntimeException("INVALID_ADMIN_DOMAIN");
+        }
 
         String otp = String.valueOf(new SecureRandom().nextInt(900000) + 100000);
 
