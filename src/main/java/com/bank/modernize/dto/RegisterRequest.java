@@ -1,10 +1,12 @@
 package com.bank.modernize.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.*;
 
-import lombok.Data;
-
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegisterRequest {
 
     @NotBlank(message = "Full name required")

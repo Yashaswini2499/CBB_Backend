@@ -98,6 +98,7 @@ public class AuthService {
 
         user.setOtpCode(null);
         user.setOtpExpiry(null);
+        user.setMfaEnabled(true);
         repo.save(user);
 
         return jwtUtil.generateToken(user.getEmail(), user.getRole().name());

@@ -26,50 +26,43 @@ public class AdminController {
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
 
-    // ================= TOTAL USERS =================
+
     @GetMapping("/total-users")
     public long totalUsers() {
         return service.getTotalUsers();
     }
 
-    // ================= TOTAL REVENUE =================
     @GetMapping("/total-revenue")
     public Double getTotalRevenue() {
         return transactionRepository.getTotalRevenue();
     }
 
-    // ================= PENDING LOANS =================
     @GetMapping("/pending-loans")
     public long getPendingLoans() {
         return service.getPendingLoans();
     }
 
-    // ================= TODAY TRANSACTIONS =================
     @GetMapping("/today-transactions")
     public long getTodayTransactions() {
         return transactionRepository.countTodayTransactions();
     }
 
-    // ================= GET ONLY CUSTOMER USERS (NO ADMIN) =================
     @GetMapping("/all-users")
     public List<User> getAllUsers() {
-        return userRepository.findByRoleNot(Role.ADMIN);   // ✅ FIXED
+        return userRepository.findByRoleNot(Role.ADMIN);  
     }
 
-    // ================= DELETE USER =================
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         String msg = service.deleteUser(id);
         return ResponseEntity.ok(msg);
     }
 
-    // ================= GET ALL TRANSACTIONS =================
     @GetMapping("/all-transactions")
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAllByOrderByCreatedAtDesc();
     }
 
-    // ================= LOAN STATUS STATS =================
     @GetMapping("/loan-status-stats")
     public Map<String, Long> getLoanStatusStats() {
 
@@ -82,7 +75,6 @@ public class AdminController {
         return stats;
     }
 
-    // ================= MONTHLY TRANSACTIONS =================
     @GetMapping("/monthly-transactions")
     public List<Map<String, Object>> getMonthlyTransactions() {
 

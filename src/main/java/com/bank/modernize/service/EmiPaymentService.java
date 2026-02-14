@@ -37,7 +37,6 @@ public class EmiPaymentService {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new RuntimeException("Account not found"));
 
-        // SECURITY CHECK
         if (!account.getCustomer().getUserId()
                 .equals(loan.getCustomer().getUserId())) {
             throw new RuntimeException("Account does not belong to this customer");
@@ -64,7 +63,6 @@ public class EmiPaymentService {
 
         emiPaymentRepository.save(payment);
     }
-
 
     public BigDecimal getTotalPaid(Loan loan) {
         List<EmiPayment> payments = emiPaymentRepository.findByLoan(loan);

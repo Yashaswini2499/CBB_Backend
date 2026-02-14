@@ -22,40 +22,23 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtFilter;
 
-    // 🔐 Password Encoder
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // 🔐 Security Filter
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            // Disable CSRF
             .csrf(csrf -> csrf.disable())
-
-            // Enable CORS
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
-            // Stateless session (JWT)
             .sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-            // Authorization rules
             .authorizeHttpRequests(auth -> auth
-
-                // Allow preflight requests
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                // Public AUTH APIs
                 .requestMatchers("/auth/**").permitAll()
-
-                // 🟢 ADMIN APIs (Dashboard)
-                .requestMatchers("/admin/**").permitAll()   // ← change to hasRole("ADMIN") later
-
-                // Public APIs (for now — debugging)
+                .requestMatchers("/admin/**").permitAll()   
                 .requestMatchers(
                         "/accounts/**",
                         "/transactions/**",
@@ -63,18 +46,13 @@ public class SecurityConfig {
                         "/bank/**",
                         "/api/loans/**"
                 ).permitAll()
-
-                // All other requests require authentication
                 .anyRequest().authenticated()
             )
-
-            // Add JWT filter
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // 🌐 CORS Configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 

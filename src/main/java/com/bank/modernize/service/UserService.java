@@ -70,7 +70,6 @@ public class UserService {
                 .orElseThrow(() ->
                         new RuntimeException("User not found"));
 
-        // Soft delete
         user.setStatus(Status.INACTIVE);
 
         userRepo.save(user);
@@ -78,10 +77,6 @@ public class UserService {
         return "User deactivated successfully";
     }
 
-
-    // =========================
-    // HELPER METHOD
-    // =========================
     private UserResponse mapToResponse(User user) {
         UserResponse res = new UserResponse();
         res.setUserId(user.getUserId());

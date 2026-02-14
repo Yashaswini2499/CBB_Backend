@@ -6,9 +6,12 @@ import java.time.LocalDateTime;
 import com.bank.modernize.enums.LoanStatus;
 import com.bank.modernize.enums.LoanType;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoanResponse {
     private Long loanId;
     private Long customerId;

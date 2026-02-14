@@ -11,11 +11,10 @@ CREATE TABLE users (
     role VARCHAR(50) NOT NULL,
     status VARCHAR(50) NOT NULL,
 	mfa_enabled BOOLEAN NOT NULL DEFAULT FALSE,
-
+    reset_otp VARCHAR(255),
+    reset_otp_expiry DATETIME,
     otp_code VARCHAR(100),
     otp_expiry TIMESTAMP NULL,
-    reset_token VARCHAR(255),
-    reset_token_expiry TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -43,7 +42,6 @@ CREATE TABLE transactions (
     FOREIGN KEY (to_acc_id) REFERENCES accounts(account_id)
 );
 
-
 CREATE TABLE loans (
     loan_id BIGINT PRIMARY KEY AUTO_INCREMENT,
     customer_id BIGINT NOT NULL,
@@ -57,13 +55,12 @@ CREATE TABLE loans (
     FOREIGN KEY (customer_id) REFERENCES users(user_id)
 );
 
-
-CREATE TABLE audit_logs (
-    log_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    action VARCHAR(255) NOT NULL,
-    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+CREATE TABLE emi_payment (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    loan_id BIGINT NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    paid_at DATETIME NOT NULL,
+    FOREIGN KEY (loan_id) REFERENCES loan(loan_id)
 );
 
 
@@ -99,29 +96,8 @@ INSERT INTO loans (customer_id, salary, loan_amount, credit_score, loan_type, em
 (1, 50000, 150000, 580, 'PERSONAL', 6000, 'REJECTED');
 
 
-INSERT INTO audit_logs (user_id,action) VALUES
-(1,'Logged in'),
-(4,'Approved a loan'),
-(2,'Transferred money'),
-(3,'Applied for loan'),
-(1,'Updated profile');
-
 ALTER TABLE loans ADD COLUMN tenure_months INT NOT NULL DEFAULT 12;
 ALTER TABLE loans ADD COLUMN annual_interest_rate DECIMAL(5,2);
 ALTER TABLE loans MODIFY emi DECIMAL(12,2) NULL;
 
-CREATE TABLE emi_payment (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-
-    loan_id BIGINT NOT NULL,
-
-    amount DECIMAL(15,2) NOT NULL,
-
-    paid_at DATETIME NOT NULL,
-
-    CONSTRAINT fk_emi_payment_loan
-        FOREIGN KEY (loan_id)
-        REFERENCES loan(loan_id)
-        ON DELETE CASCADE
-);
 

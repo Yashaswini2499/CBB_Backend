@@ -71,22 +71,18 @@ public class LoanService {
         return mapToResponse(loanRepository.save(loan));
     }
 
-
-    // Approve loan
     public LoanResponse approveLoan(Long loanId) {
         Loan loan = getLoanEntity(loanId);
         loan.setStatus(LoanStatus.APPROVED);
         return mapToResponse(loanRepository.save(loan));
     }
 
-    // Reject loan
     public LoanResponse rejectLoan(Long loanId) {
         Loan loan = getLoanEntity(loanId);
         loan.setStatus(LoanStatus.REJECTED);
         return mapToResponse(loanRepository.save(loan));
     }
 
-    // Get all loans of customer
     public List<LoanResponse> getLoansByCustomer(Long customerId) {
         return loanRepository.findByCustomerUserId(customerId) 
                 .stream()
@@ -94,7 +90,6 @@ public class LoanService {
                 .collect(Collectors.toList());
     }
 
-    // Get loan by ID
     public LoanResponse getLoanById(Long loanId) {
         return mapToResponse(getLoanEntity(loanId));
     }
@@ -104,7 +99,6 @@ public class LoanService {
                 .orElseThrow(() -> new RuntimeException("Loan not found: " + loanId));
     }
     
- // ================= ADMIN → GET PENDING LOANS =================
     public List<LoanResponse> getPendingLoans() {
         return loanRepository.findByStatus(LoanStatus.PENDING)
                 .stream()

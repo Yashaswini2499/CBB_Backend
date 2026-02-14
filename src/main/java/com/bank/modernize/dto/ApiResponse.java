@@ -1,9 +1,10 @@
 package com.bank.modernize.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class ApiResponse {
     private String status;

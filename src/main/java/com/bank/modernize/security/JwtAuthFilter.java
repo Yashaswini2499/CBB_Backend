@@ -21,10 +21,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final CustomUserDetailsService userDetailsService;
     private final RevokedTokenService revokedTokenService;
 
-    /**
-     * 🔴 IMPORTANT:
-     * Skip JWT filter for /auth endpoints (login, register, verify-otp, forgot, reset)
-     */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
@@ -39,7 +35,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         final String header = request.getHeader("Authorization");
 
-        // If no token → continue (public request)
         if (header == null || !header.startsWith("Bearer ")) {
             chain.doFilter(request, response);
             return;
@@ -47,7 +42,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String token = header.substring(7);
 
-        // If token revoked → block request
         if (revokedTokenService.isRevoked(token)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;

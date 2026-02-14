@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // ================= VALIDATION ERROR (DTO @Valid) =================
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> handleValidation(MethodArgumentNotValidException ex) {
 
@@ -31,7 +30,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    // ================= CONSTRAINT VIOLATION =================
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ApiResponse> handleConstraint(ConstraintViolationException ex) {
 
@@ -44,7 +42,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    // ================= RUNTIME EXCEPTION =================
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ApiResponse> handleRuntime(RuntimeException ex) {
 
@@ -57,7 +54,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    // ================= GENERAL EXCEPTION =================
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleGeneral(Exception ex) {
 

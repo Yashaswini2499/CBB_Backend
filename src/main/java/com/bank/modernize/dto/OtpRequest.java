@@ -1,10 +1,12 @@
 package com.bank.modernize.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OtpRequest {
-
     private String email;
     private String otp;
 }

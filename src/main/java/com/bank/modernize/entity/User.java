@@ -47,7 +47,6 @@ public class User {
     @Column(name = "mfa_enabled", nullable = false)
     private Boolean mfaEnabled = false;
     
- // 🔑 Forgot password OTP (PHONE)
     @Column(name = "reset_otp")
     private String resetOtp;
 
@@ -57,10 +56,6 @@ public class User {
     private String otpCode;
 
     private LocalDateTime otpExpiry;
-
-    private String resetToken;
-
-    private LocalDateTime resetTokenExpiry;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

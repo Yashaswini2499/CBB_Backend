@@ -27,7 +27,7 @@ public class EmailService {
             System.out.println("Email sent successfully to " + email);
 
         } catch (MailException ex) {
-            // If email is fake / not reachable → do NOT fail app
+            // If email is fake / not reachable,do NOT fail app
             System.out.println("Email sending failed. Using console OTP only.");
         }
     }

@@ -1,8 +1,11 @@
 package com.bank.modernize.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TransactionRequest {
     private Long accountNumber;
     private double amount;

@@ -1,8 +1,10 @@
 package com.bank.modernize.dto;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class EmiResult {
     private double emi;

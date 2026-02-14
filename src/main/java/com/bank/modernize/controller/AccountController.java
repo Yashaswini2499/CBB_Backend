@@ -19,24 +19,18 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    // =========================
-    // CREATE ACCOUNT (LOGGED-IN USER)
-    // =========================
     @PostMapping("/create")
     public ResponseEntity<AccountResponse> createAccount(
             @RequestBody CreateAccountRequest request,
             org.springframework.security.core.Authentication auth) {
 
-        String email = auth.getName();   // email from JWT
+        String email = auth.getName();   
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(accountService.createAccountForLoggedInUser(request, email));
     }
 
-    // =========================
-    // GET ACCOUNT BY ID
-    // =========================
     @GetMapping("/{accountId}")
     public ResponseEntity<AccountResponse> getAccountById(
             @PathVariable Long accountId) {
@@ -45,9 +39,6 @@ public class AccountController {
                 accountService.getAccountById(accountId));
     }
 
-    // =========================
-    // GET ALL ACCOUNTS
-    // =========================
     @GetMapping
     public ResponseEntity<List<AccountResponse>> getAllAccounts() {
 
@@ -55,9 +46,6 @@ public class AccountController {
                 accountService.getAllAccounts());
     }
 
-    // =========================
-    // GET ACCOUNTS BY CUSTOMER ID
-    // =========================
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<List<AccountResponse>> getByCustomerId(
             @PathVariable Long customerId) {
@@ -66,9 +54,7 @@ public class AccountController {
                 accountService.getAccountsByCustomerId(customerId));
     }
 
-    // =========================
-    // GET LOGGED-IN USER ACCOUNTS
-    // =========================
+
     @GetMapping("/my-accounts")
     public ResponseEntity<List<AccountResponse>> getMyAccounts(
             org.springframework.security.core.Authentication auth) {
@@ -79,9 +65,6 @@ public class AccountController {
                 accountService.getAccountsByEmail(email));
     }
 
-    // =========================
-    // DELETE ACCOUNT
-    // =========================
     @DeleteMapping("/{accountId}")
     public ResponseEntity<String> deleteByAccountId(
             @PathVariable Long accountId) {

@@ -1,11 +1,13 @@
 package com.bank.modernize.dto;
-import lombok.Data;
 import com.bank.modernize.enums.Role;
 import com.bank.modernize.enums.Status;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserResponse {
-
     private Long userId;
     private String fullName;
     private String email;

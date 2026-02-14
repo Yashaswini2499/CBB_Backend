@@ -1,13 +1,17 @@
 package com.bank.modernize.dto;
 
 import com.bank.modernize.enums.Status;
-import lombok.Data;
 
-@Data
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateUserRequest {
 
     private String fullName;
     private String phone;
-    private Status status;        // ACTIVE / INACTIVE
-    private Boolean mfaEnabled;   // true / false
+    private Status status;        
+    private Boolean mfaEnabled;   
 }

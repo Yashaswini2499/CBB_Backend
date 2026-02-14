@@ -11,19 +11,13 @@ import com.bank.modernize.enums.Role;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByResetToken(String token);
-
-    Optional<User> findByPhone(String phone);
-
     Optional<User> findByEmail(String email);
 
     boolean existsByEmail(String email);
 
     boolean existsByUserId(Long userId);
 
-    // 🔢 TOTAL USERS COUNT (Admin Dashboard)
     long count();
 
-    // ✅ GET ONLY NON-ADMIN USERS (USED IN ADMIN PANEL)
     List<User> findByRoleNot(Role role);
 }

@@ -30,9 +30,6 @@ public class AccountService {
     private final UserRepository userRepo;
     private final TransactionRepository transactionRepo;
 
-    // =========================
-    // CREATE ACCOUNT FOR LOGGED-IN USER
-    // =========================
     @Transactional
     public AccountResponse createAccountForLoggedInUser(CreateAccountRequest request, String email) {
 
@@ -74,10 +71,6 @@ public class AccountService {
 
         return mapToResponse(acc);
     }
-
-    // =========================
-    // OTHER METHODS (UNCHANGED)
-    // =========================
 
     public AccountResponse getAccountById(Long accountId) {
 
@@ -163,8 +156,7 @@ public class AccountService {
         Long number;
 
         do {
-            number = 100000000000L +
-                    (long) (r.nextDouble() * 900000000000L);
+            number = 100000000000L + (long) (r.nextDouble() * 900000000000L);
         } while (accountRepo.existsByAccountNumber(number));
 
         return number;

@@ -21,8 +21,6 @@ public class BankingService {
     private final TxnLogService txnLogService;
     private final UserRepository userRepo;
 
-
-
     @Transactional
     public ApiResponse deposit(TransactionRequest req) {
 
@@ -59,7 +57,6 @@ public class BankingService {
         }
     }
 
-
     @Transactional
     public ApiResponse withdraw(TransactionRequest req) {
 
@@ -95,7 +92,6 @@ public class BankingService {
             throw e;
         }
     }
-
 
     @Transactional
     public ApiResponse transfer(TransferRequest req) {
@@ -169,6 +165,5 @@ public class BankingService {
 
         return new ApiResponse("SUCCESS", "Total balance calculated", total);
     }
-
 
 }

@@ -37,10 +37,8 @@ public class TransactionService {
     }
 
 
-
     public List<TransactionResponse> getCustomerTransactions(Long userId) {
 
-  
         List<Account> accounts = accountRepo.findByCustomerUserId(userId);
 
         List<Long> accountIds = new ArrayList<>();

@@ -23,25 +23,21 @@ public class LoanController {
     private final LoanService loanService;
     private final UserRepository userRepo;
 
-    // 1. Apply loan
     @PostMapping("/apply")
     public ResponseEntity<LoanResponse> applyLoan(@RequestBody LoanRequest request){
         return new ResponseEntity<>(loanService.applyLoan(request), HttpStatus.CREATED);
     }
 
-    // 2. Approve loan
     @PutMapping("/{loanId}/approve")
     public ResponseEntity<LoanResponse> approveLoan(@PathVariable Long loanId) {
         return ResponseEntity.ok(loanService.approveLoan(loanId));
     }
 
-    // 3. Reject loan
     @PutMapping("/{loanId}/reject")
     public ResponseEntity<LoanResponse> rejectLoan(@PathVariable Long loanId) {
         return ResponseEntity.ok(loanService.rejectLoan(loanId));
     }
 
-    // 4. Get all loans of customer
     @GetMapping("/customer")
     public ResponseEntity<List<LoanResponse>> getMyLoans(
             org.springframework.security.core.Authentication auth) {
@@ -56,16 +52,11 @@ public class LoanController {
                 loanService.getLoansByCustomer(user.getUserId()));
     }
     
-
- // ================= ADMIN → GET ALL PENDING LOANS =================
     @GetMapping("/admin/pending")
     public ResponseEntity<List<LoanResponse>> getPendingLoans() {
         return ResponseEntity.ok(loanService.getPendingLoans());
     }
 
-
-
-    // 5. Get loan by ID
     @GetMapping("/{loanId}")
     public ResponseEntity<LoanResponse> getLoanById(@PathVariable Long loanId) {
         return ResponseEntity.ok(loanService.getLoanById(loanId));

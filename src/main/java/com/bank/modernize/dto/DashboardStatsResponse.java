@@ -1,11 +1,11 @@
 package com.bank.modernize.dto;
 
 import java.math.BigDecimal;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class DashboardStatsResponse {
     private long totalUsers;

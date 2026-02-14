@@ -3,9 +3,12 @@ package com.bank.modernize.dto;
 import java.math.BigDecimal;
 import com.bank.modernize.enums.AccountType;
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateAccountRequest {
 
     @NotNull
